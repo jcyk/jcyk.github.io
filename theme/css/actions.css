@@ -1,0 +1,43 @@
+
+.social {
+    font-size: 50px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.social [class^="icon-"]:before,
+.social [class*=" icon-"]:before {
+    margin-left: .1em;
+    margin-right: .1em;
+    -webkit-font-smoothing: antialiased;
+}
+
+.social .icon-github-circled:before {
+    color: #333;
+}
+
+.social .icon-twitter:before {
+    color: #5e9fca;
+}
+
+.social .icon-linkedin-squared:before {
+    color: #0071a1;
+}
+
+.social .icon-stackoverflow:before {
+    background: -webkit-linear-gradient(#f90, #86868a);
+    color: #86868a;
+    margin-right: 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.social .icon-foursquare:before {
+    color: #00aeef;
+}
+
+.social .icon-gmail:before {
+    color: #e93e30;
+    font-size: .9em;
+    margin-right: .3em;
+}
