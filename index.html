@@ -4,25 +4,18 @@
 <meta charset="utf-8">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Deng Cai's Homepage</title>
-<meta id="viewport" name="viewport" content="width=500" />
+<meta id="viewport" name="viewport" content="width=800" />
 <meta name="description" content="Deng Cai and Natural Language Processing" />
-
-
 <link rel="stylesheet" href="./theme/css/normalize.css" type="text/css" />
 <link rel="stylesheet" href="./theme/css/base.css" type="text/css" />
 <link rel="stylesheet" href="./theme/css/code.css" type="text/css" />
-
-
-<!-- 
-<link rel="icon" type="image/png" href="./theme/images/avatar.png" sizes="200x200">
-<link rel="icon" type="image/png" href="./theme/images/favicon.png" sizes="32x32"> -->
-
-
+<style type="text/css">
+a:link {color: #0000FF}
+a:visited {color: #0000FF}
+</style>
 </head>
 <body>
-
 <div class="content">
-
     <header>
         <img src="./theme/images/cd.jpeg" alt="me">
         <h1>Deng Cai</h1>
@@ -33,55 +26,61 @@
             <li><a href="./cv.pdf">CV</a></li>
         </ul>
     </header>
-
-
 <section id="bio">
-
-    I am a master student at Shanghai Jiao Tong Univeristy, working on Natural Language Processing. I am supervised by <a href="http://bcmi.sjtu.edu.cn/~zhaohai">Hai Zhao</a>. 
+I am a master student at Shanghai Jiao Tong Univeristy, working on Natural Language Processing. 
 <br>
 Get in touch with me through <a href="mailto:thisisjcykcd@gmail">my email</a>.
-
 </section>
-
-
 <section id="backgroud">
-    <h2>Work Experience:</h2>
+    <h2>Education:</h2>
+    <ul>
+    <li>Sept. 2015 - Present<br>
+    Master student, Dept. of Computer Science, Shanghai Jiao Tong University</li>
+    <li>Sept. 2011 - Jun. 2015<br>
+    BE, Dept. of Computer Science, Xiamen University</li>
+    </ul>
+    <h2>Academic Experience:</h2>
     <ul>
     <li>Jul. 2017 - Present<br>
     Visiting research fellow, Singapore University of Technology and Design <br>Advisor: <a href="http://people.sutd.edu.sg/~yue_zhang/"> Yue Zhang</a></li> 
     <li>Feb. 2017 -Jun. 2017<br>
     Research intern, Tencent AI Lab <br>Mentors: Xiaojiang Liu, Shuming Shi</li>
+    <li>Sept. 2015 -Feb. 2017<br>
+    Research assistant, Shanghai Jiao Tong University <br>Supervisor: <a href="http://bcmi.sjtu.edu.cn/~zhaohai">Hai Zhao</a></li>
     </ul> 
-    <h2>Education:</h2>
-    <ul>
-    <li>Sept. 2015 - Present<br>
-    Master student, Dept. of Computer Science, Shanghai Jiao Tong University <br>Supervisor: Hai Zhao</li>
-    <li>Sept. 2011 - Jun. 2015<br>
-    BE, Dept. of Computer Science, Xiamen University</li>
-    </ul>
-
 </section>
-
 <section id="pubs">
-
     <h2>Publications:</h2>
-
     <ul>
         <li>Fast and Accurate Neural Word Segmentation for Chinese.
-            <a href = "http://www.aclweb.org/anthology/P/P17/P17-2096.pdf" target="_blank"> [paper]</a> <a href = "https://github.com/jcyk/greedyCWS" target="_blank"> [code] </a><br><b>Deng Cai</b>, Hai Zhao. In Proceedings of the ACL 2017 Conference, 2017. (<b>ACL 2017</b>).</li>
-<li> A Hybrid Model for Chinese Spelling Check. <br><b>Deng Cai</b>, Hai Zhao, Yang Xin, Yuzhu Wang, Zhongye Jia. ACM Transactions on Asian Low-Resource Language Information Process, 2017. (<b>TALLIP</b>).</li>
-<li> Neural Word Segmentation Learning for Chinese.
-<a href = "http://www.aclweb.org/anthology/P/P16/P16-1039.pdf" target="_blank">[paper]</a>
-<a href = "https://github.com/jcyk/CWS" target="_blank"> [code] </a><br><b>Deng Cai</b> and Hai Zhao. In Proceedings of the ACL 2016 Conference, 2016. (<b>ACL 2016</b>).</li>
-                    </ul>
-                    
-
+            <a href = "http://www.aclweb.org/anthology/P/P17/P17-2096.pdf"> [paper]</a> <a href = "https://github.com/jcyk/greedyCWS"> [code] </a><br><b>Deng Cai</b>, Hai Zhao. In Proceedings of the ACL 2017 Conference, 2017. (<b>ACL 2017</b>).</li>
+        <li> A Hybrid Model for Chinese Spelling Check. <br><b>Deng Cai</b>*, Hai Zhao* (first authors), Yang Xin, Yuzhu Wang, Zhongye Jia. ACM Transactions on Asian Low-Resource Language Information Process, 2017. (<b>TALLIP</b>).</li>
+        <li> Neural Word Segmentation Learning for Chinese.
+        <a href = "http://www.aclweb.org/anthology/P/P16/P16-1039.pdf" >[paper]</a>
+        <a href = "https://github.com/jcyk/CWS">[code] </a><br><b>Deng Cai</b> and Hai Zhao. In Proceedings of the ACL 2016 Conference, 2016. (<b>ACL 2016</b>).</li>
+    </ul>
 </section>
 
-
-
+<section id="projects">
+    <h2>Open Source Projects: <a/ href="https://github.com/jcyk">(Github Profile) </a></h2>
+    <ul>
+        <li><a href="https://github.com/jcyk/CWS">Chinese Word Segmentation</a> <br>Efficient neural Chinese word segmentation algorithms. Our framwork directly models the structure of Chinese word sequence.</li>
+        <li><a href="https://github.com/jcyk/Dynet-Biaffine-dependency-parser">Dependency Parser</a> <br> This is the Dynet-based version of Biaffine dependency parser. Many domain daptation methods are tested on this model.</li>
+        <li><a href="https://github.com/jcyk/IDRC">Implicit Discourse Relation Classification</a><br>Pair-aware sentence modeling for Implicit Discourse Relation Classification.<a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-60045-1_47.pdf">[paper]</a></li>
+        <li><a href="https://github.com/clab/dynet">Dynet</a><br> a list of my contributions is <a href="https://github.com/clab/dynet/commits?author=jcyk"> here </a>. </li>
+    </ul>
+</section>
+<section id="honor">
+    <h2>Awards and Honors:</h2>
+    <ul>
+        <li>National Scholarship for Graduate Student, Ministry of Education of P.R.China, 2016</li>
+        <li>Excellent Undergraduate Thesis Award, XMU, 2015</li>
+        <li>Dean's List, 2014, School of Information Science and Engineering, XMU, 2014</li>
+        <li>Gold Medal, The 5-th Fujian Provincial University Programming Contest,  2014</li>
+        <li>Bronze Medal, ACM-ICPC Asia Regional Programming Contest, 2013 </li>
+    </ul>
+</section>
 </div>
-
-Last modified date: 10 Aug, 2017.
+Last modified date: 3 Nov, 2017.
 </body>
 </html>
