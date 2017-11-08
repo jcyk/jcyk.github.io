@@ -9,7 +9,7 @@ html, body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
     background: transparent;
     background-size: 2px 2px;
     background-position: 0 15px;
@@ -40,14 +40,14 @@ li {
 
 h2 {
     display: inline;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     line-height: 1.5;
     margin: 0 10px 0 0;
 }
 
 .content {
-    width: 666px;
+    width: 777px;
     margin: 0 auto;
 }
 
@@ -79,9 +79,9 @@ header:after,
 section:after {
     content: '';
     display: block;
-    width: 150px;
+    width: 666px;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 30px auto;
+    margin: 15px auto;
     padding: 0;
 }
 
