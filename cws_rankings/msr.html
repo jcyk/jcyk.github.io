@@ -1,0 +1,295 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script type="text/javascript">
+function analysis(id)
+{
+    document.body.innerHTML += '<form id="dynForm" action="/cws_rankings/'+id.id+'" method="get" ></form>';
+    document.getElementById("dynForm").submit();
+}
+</script>
+<h1 align = "center">Performance Rankings for Chinese Word Segmentation</h1>
+
+<i>
+This list presents recent CWS results on SIGHAN Bakeoff 2005 datasets.
+<br>
+Click on head columns to sort the results on corresponding metrics.
+<br>
+Please report any mistake or any addition to thisisjcykcd@gmail.com
+</i>
+<ul class="entries">
+<div class="table-responsive" style="margin: 0; overflow:auto;">
+    <table class="table table-striped", align = "center">
+    <tbody class="table-slide">
+    <tr>
+      <td id = "paper" onclick="analysis(this)"><b>Paper</b></td>
+      <td id = "pku " onclick="analysis(this)" align = "center", width = "66px"><b>PKU</b></td>
+      <td id = "msr" onclick="analysis(this)" align = "center", width = "66px"><font style='background-color: cyan;'><b>MSR</b></font></td>
+      <td id = "cityu" onclick="analysis(this)" align = "center", width = "66px"><b>CityU</b></td>
+      <td id = "as" onclick="analysis(this)" align = "center", width = "66px"><b>AS</b></td>
+      <td id = "pku_o" onclick="analysis(this)" align = "center", width = "66px"><b>PKU (open)</b></td>
+      <td id = "msr_o" onclick="analysis(this)" align = "center", width = "66px"><b>MSR (open)</b></td>
+      <td id = "cityu_o" onclick="analysis(this)" align = "center", width = "66px"><b>CityU (open)</b></td>
+      <td id = "as_o" onclick="analysis(this)" align = "center", width = "66px"><b>AS (open)</b></td>
+    <td id = "venue" onclick="analysis(this)" align = "center", width = "66px"><b>Venue</b></td>
+       <td id = "year" onclick="analysis(this)" align = "center", width = "66px"><b>year</b></td>
+    </tr>
+    
+      <tr>
+        <td>Zhao and Kit (2008)</td>
+        <td align = "center", width = "50px">95.4</td>
+        <td align = "center">97.6</td>
+        <td align = "center">96.1</td>
+        <td align = "center">95.7</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">SIGHAN</td>
+         <td align = "center">2008</td>
+      </tr>
+    
+      <tr>
+        <td>Sun et al. (2012)</td>
+        <td align = "center", width = "50px">95.4</td>
+        <td align = "center">97.4</td>
+        <td align = "center">94.8</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2012</td>
+      </tr>
+    
+      <tr>
+        <td>Sun et al. (2009)</td>
+        <td align = "center", width = "50px">95.2</td>
+        <td align = "center">97.3</td>
+        <td align = "center">94.6</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">NAACL</td>
+         <td align = "center">2009</td>
+      </tr>
+    
+      <tr>
+        <td>Zhang and Clark (2007)</td>
+        <td align = "center", width = "50px">94.5</td>
+        <td align = "center">97.2</td>
+        <td align = "center">94.6</td>
+        <td align = "center">96.5</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2007</td>
+      </tr>
+    
+      <tr>
+        <td>Zhang et al. (2016)</td>
+        <td align = "center", width = "50px">95.1</td>
+        <td align = "center">97.0</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">95.7</td>
+        <td align = "center">97.7</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2016</td>
+      </tr>
+    
+      <tr>
+        <td>Cai et al. (2017)</td>
+        <td align = "center", width = "50px">95.4</td>
+        <td align = "center">97.0</td>
+        <td align = "center">95.4</td>
+        <td align = "center">95.2</td>
+        <td align = "center">95.8</td>
+        <td align = "center">97.1</td>
+        <td align = "center">95.6</td>
+        <td align = "center">95.3</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2017</td>
+      </tr>
+    
+      <tr>
+        <td>Ma and Hinrichs (2015)</td>
+        <td align = "center", width = "50px">95.1</td>
+        <td align = "center">96.6</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2015</td>
+      </tr>
+    
+      <tr>
+        <td>Tseng et al. (2005)</td>
+        <td align = "center", width = "50px">95.0</td>
+        <td align = "center">96.4</td>
+        <td align = "center">95.2</td>
+        <td align = "center">94.7</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">SIGHAN</td>
+         <td align = "center">2005</td>
+      </tr>
+    
+      <tr>
+        <td>Cai and Zhao (2016)</td>
+        <td align = "center", width = "50px">95.2</td>
+        <td align = "center">96.4</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">95.5</td>
+        <td align = "center">96.5</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2016</td>
+      </tr>
+    
+      <tr>
+        <td>Liu et al. (2016)</td>
+        <td align = "center", width = "50px">93.9</td>
+        <td align = "center">95.2</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">95.7</td>
+        <td align = "center">97.6</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">IJCAI</td>
+         <td align = "center">2016</td>
+      </tr>
+    
+      <tr>
+        <td>Chen et al. (2015)</td>
+        <td align = "center", width = "50px">94.4</td>
+        <td align = "center">95.1</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">96.4</td>
+        <td align = "center">97.6</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2015</td>
+      </tr>
+    
+      <tr>
+        <td>Chen et al. (2015)</td>
+        <td align = "center", width = "50px">94.3</td>
+        <td align = "center">95.0</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">96.5</td>
+        <td align = "center">97.4</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">EMNLP</td>
+         <td align = "center">2015</td>
+      </tr>
+    
+      <tr>
+        <td>Pei et al. (2014)</td>
+        <td align = "center", width = "50px">93.5</td>
+        <td align = "center">94.0</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">94.4</td>
+        <td align = "center">94.9</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2014</td>
+      </tr>
+    
+      <tr>
+        <td>Zheng et al. (2013)</td>
+        <td align = "center", width = "50px">92.4</td>
+        <td align = "center">92.8</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">93.3</td>
+        <td align = "center">93.9</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">EMNLP</td>
+         <td align = "center">2013</td>
+      </tr>
+    
+      <tr>
+        <td>Zhao et al. (2010)</td>
+        <td align = "center", width = "50px">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">98.3</td>
+        <td align = "center">97.8</td>
+        <td align = "center">96.1</td>
+        <td align = "center">TALIP</td>
+         <td align = "center">2010</td>
+      </tr>
+    
+      <tr>
+        <td>Zhang et al. (2013)</td>
+        <td align = "center", width = "50px">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">96.1</td>
+        <td align = "center">97.4</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">EMNLP</td>
+         <td align = "center">2013</td>
+      </tr>
+    
+      <tr>
+        <td>Xu and Sun (2016)</td>
+        <td align = "center", width = "50px">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">96.1</td>
+        <td align = "center">96.3</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2016</td>
+      </tr>
+    
+      <tr>
+        <td>Yang et al. (2017)</td>
+        <td align = "center", width = "50px">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">-</td>
+        <td align = "center">96.2</td>
+        <td align = "center">97.3</td>
+        <td align = "center">96.7</td>
+        <td align = "center">95.4</td>
+        <td align = "center">ACL</td>
+         <td align = "center">2017</td>
+      </tr>
+    
+    </tbody>
+    </table>
+</div>
+  </ul>
+<i>
+Create by Deng Cai (https://jcyk.github.io/)
+</i>

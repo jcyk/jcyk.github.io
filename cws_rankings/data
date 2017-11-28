@@ -1,0 +1,19 @@
+paper	pku	msr	cityu	as	pku_o	msr_o	cityu_o	as_o	year	venue
+Tseng et al. (2005)	95.0	96.4	95.2	94.7	-	-	-	-	2005	SIGHAN
+Zhang and Clark (2007)	94.5	97.2	94.6	96.5	-	-	-	-	2007	ACL
+Zhao and Kit (2008)	95.4	97.6	96.1	95.7	-	-	-	-	2008	SIGHAN
+Sun et al. (2009)	95.2	97.3	94.6	-	-	-	-	-	2009	NAACL
+Zhao et al. (2010)	-	-	-	-	-	98.3	97.8	96.1	2010	TALIP
+Sun et al. (2012)	95.4	97.4	94.8	-	-	-	-	-	2012	ACL
+Zhang et al. (2013)	-	-	-	-	96.1	97.4	-	-	2013	EMNLP
+Zheng et al. (2013)	92.4	92.8	-	-	93.3	93.9	-	-	2013	EMNLP
+Pei et al. (2014)	93.5	94.0	-	-	94.4	94.9	-	-	2014	ACL
+Chen et al. (2015)	94.4	95.1	-	-	96.4	97.6	-	-	2015	ACL
+Chen et al. (2015)	94.3	95.0	-	-	96.5	97.4	-	-	2015	EMNLP
+Ma and Hinrichs (2015)	95.1	96.6	-	-	-	-	-	-	2015	ACL
+Cai and Zhao (2016)	95.2	96.4	-	-	95.5	96.5	-	-	2016	ACL
+Xu and Sun (2016)	-	-	-	-	96.1	96.3	-	-	2016	ACL
+Zhang et al. (2016)	95.1	97.0	-	-	95.7	97.7	-	-	2016	ACL
+Liu et al. (2016)	93.9	95.2	-	-	95.7	97.6	-	-	2016	IJCAI
+Yang et al. (2017)	-	-	-	-	96.2	97.3	96.7	95.4	2017	ACL
+Cai et al. (2017)	95.4	97.0	95.4	95.2	95.8	97.1	95.6	95.3	2017	ACL
