@@ -1,0 +1,3 @@
+Deng Cai is a senior PhD student (final-year) at The Chinese University of Hong Kong. Previously, he received his M.S. in computer science from Shanghai Jiao Tong University. His research interests include semantic parsing, dialogue systems, and text generation. He has published over 20 research papers at prestigious conferences and journals, such as ACL, EMNLP, NAACL, and AAAI. He won an outstanding paper award at ACL 2021. He serves as a regular program committee member in leading NLP conferences including ACL, EMNLP, NAACL etc, and was selected as an outstanding reviewer at EMNLP 2020.
+
+Website: https://jcyk.github.io/
