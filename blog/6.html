@@ -3,7 +3,7 @@
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 
-<title>Deng Cai‘s Blog</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
 .mac-os-11 { --title-bar-height: 28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; tab-size: 4; background-position: inherit; background-repeat: inherit; }
@@ -590,9 +590,9 @@ header, .context-menu, .megamenu-content, footer{
 
 
  @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
-</style><title>index</title>
+</style><title>也谈系统深入</title>
 </head>
 <body class='typora-export'><div class='typora-export-content'>
-<div id='write'  class=''><h2 id='hello-here-is-my-blog'><span>Hello! Here is my blog!</span></h2><ul><li><span>I will share my opinions here.</span></li><li><span>I will record my life here.</span></li><li><span>I will keep it simple.</span></li></ul><h2 id='post-list'><span>Post List</span></h2><p><a href='6.html'><span>也谈系统深入</span></a><span> posted on Jun. 25, 2020.</span></p><p><a href='5.html'><span>My Reflections on My Boring Research Achievement</span></a><span> posted on Feb. 3, 2020.</span></p><p><a href='4.html'><span>在Python中使用C/C++</span></a><span> posted on Jan. 24, 2017. (updated on Mar. 9, 2017)</span></p><p><a href='3.html'><span>阶梯博弈</span></a><span> posted on Dec. 17, 2016.</span></p><p><a href='2.html'><span>Bagging and Boosting</span></a><span> posted on Dec. 13, 2016.</span></p><p><a href='1.html'><span>机器学习知识梳理</span></a><span> posted on Dec. 10, 2016.</span></p></div></div>
+<div id='write'  class=''><h1 id='也谈系统深入'><span>也谈系统深入</span></h1><p><span>很多资深研究者（指入行有一段时间且累积了一定数量的论文的人）喜欢把”系统深入“作为目标，有的固然已经做出了系统深入的工作，另外的也以此标榜自己的学术品位。受此影响，很多资历较浅的研究者在选题和开展研究工作时也往往瞄准了”系统深入“。</span></p><p><span>可见，”系统深入“是多么重要的概念。这里我也想聊聊我心中的“系统深入”。首先，在我看来，“系统”和“深入”是两个完全不同的概念：前者指对某个问题有全面的研究，后者指对某个问题有着深入的突破。我先说说我心中的一个怪现象：A在同一个任务上做了一系列研究，但是每篇的论文的垫脚石（baseline）全没怎么变过，更重要的是这些工作中没有谁是谁的垫脚石。A在这个任务上的研究深入吗？恐怕也说得过去，人家可是一直深耕着一个任务。这不就是突破突破再突破吗？</span></p><p><span>我想说的是，上面关于“系统”和“深入”的定义还是含糊不清，模凌两可。我来下个严格的定义：“系统”意味着“并列”，深入意味着“递进”。当我们总结自己的工作，看看并列关系多还是递进关系多。举些例子，同一个问题的不同方面是并列关系，同一个问题的不同子问题也是并列关系。更形象地说，当我们用图总结工作时，图1是“系统”（并列），图2是“深入”（递进）。特别注意，当既可以用图1也可以用图2时，请用图1。可见，“系统深入”是难以做得到的，其中最难的不是“系统”，而是“深入”。就我看来，现在很多研究者的工作往往是“系统”而不“深入”。围绕着一个问题旁征博引、左右开弓的人更像一个“守门员”，他们在一个问题上因为长期的投入有着足够的积累，对各种数据集、实验设置等相当熟悉，只要一有什么新鲜的想法从哪冒出来，马上就能借鉴化用。守着这个地盘其他人想要分一杯羹可不容易，真是领域权威呢。</span></p><p><img src="./6-1.png" referrerpolicy="no-referrer" alt="6-1"></p><p><span>在我看来，“深入”也不见得要有图2。也许图3就够了。我认为只要有绝妙的点子就够了，而绝妙的点子往往意味着绝对的深入。比起“守门员”的行为，在一个或几个问题上有零星的绝妙点子才更值得尊重和欣赏。</span></p><p><img src="./6-2.png" style="zoom:8%;" /></p><p><span>最后一点申明：“系统”和“深入”是目标和结果，“专注”是途径和过程。</span></p><p>&nbsp;</p></div></div>
 </body>
 </html>
