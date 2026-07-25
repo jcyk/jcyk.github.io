@@ -1,61 +1,340 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Deng Cai's Homepage</title>
-<meta id="viewport" name="viewport" content="width=800" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Deng Cai and Natural Language Processing" />
 <meta name="keywords" content="Deep Learning, Machine Learning, Natural Language Processing, Large Language Model, 蔡登, 机器学习, 深度学习, 自然语言处理, 大模型" />
-<link rel="stylesheet" href="./theme/css/base.css" type="text/css" />
+<style>
+    :root {
+        --accent: #2563eb;
+        --accent-soft: #eff4ff;
+        --accent-dark: #1d4ed8;
+        --text: #1f2430;
+        --text-soft: #4b5568;
+        --muted: #7a8395;
+        --border: #e6e8ee;
+        --bg: #ffffff;
+        --bg-alt: #fafbfc;
+        --tag-bg: #eef2fb;
+        --tag-text: #2952c8;
+        --sidebar-w: 280px;
+        --content-max: 760px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color .15s ease, border-color .15s ease;
+    }
+    a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+    /* Layout */
+    .layout {
+        display: flex;
+        align-items: flex-start;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 32px;
+        gap: 56px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: var(--sidebar-w);
+        flex: 0 0 var(--sidebar-w);
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 48px 0 32px;
+    }
+    .sidebar .photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 22px;
+        border: 3px solid #fff;
+        box-shadow: 0 4px 20px rgba(30,50,90,.15);
+    }
+    .sidebar .name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 0 6px;
+        letter-spacing: -.01em;
+    }
+    .sidebar .affil {
+        font-size: .86rem;
+        color: var(--text-soft);
+        text-align: center;
+        margin: 0 0 4px;
+        line-height: 1.45;
+    }
+    .sidebar .socials {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin: 14px 0 26px;
+    }
+    .sidebar .socials a {
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sidebar .socials a:hover { color: var(--accent); }
+    .sidebar .socials svg { width: 20px; height: 20px; fill: currentColor; }
+    .sidebar nav { border-top: 1px solid var(--border); padding-top: 18px; }
+    .sidebar nav a {
+        display: block;
+        font-size: .92rem;
+        color: var(--text-soft);
+        padding: 7px 12px;
+        border-radius: 8px;
+        border-left: 2px solid transparent;
+    }
+    .sidebar nav a:hover {
+        background: var(--accent-soft);
+        color: var(--accent-dark);
+        text-decoration: none;
+        border-left-color: var(--accent);
+    }
+
+    /* Main content */
+    main {
+        flex: 1 1 auto;
+        max-width: var(--content-max);
+        min-width: 0;
+        padding: 48px 0 80px;
+    }
+
+    section { margin-bottom: 44px; scroll-margin-top: 24px; }
+
+    h2 {
+        font-size: 1.32rem;
+        font-weight: 700;
+        letter-spacing: -.01em;
+        margin: 0 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+    }
+    h2 a { font-size: .82rem; font-weight: 500; color: var(--muted); }
+    h3.subhead {
+        font-size: 1.02rem;
+        font-weight: 700;
+        color: var(--text);
+        margin: 22px 0 8px;
+    }
+
+    p { margin: 0 0 14px; color: var(--text-soft); }
+    #bio p, #bio li { color: var(--text-soft); }
+
+    ul { margin: 0 0 14px; padding-left: 22px; }
+    li { margin-bottom: 8px; }
+
+    b { color: var(--text); }
+
+    details { margin: 10px 0; }
+    summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+        padding: 6px 0;
+        list-style-position: inside;
+    }
+    summary:hover { color: var(--accent); }
+    details > *:not(summary) { animation: fade .25s ease; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+    .recruit {
+        background: var(--accent-soft);
+        border: 1px solid #cddafc;
+        border-left: 4px solid var(--accent);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 18px 0;
+        color: var(--text) !important;
+        font-weight: 500;
+    }
+
+    /* Publications */
+    .pub-note { font-size: .88rem; color: var(--muted); }
+    #pubs ul, #pubs .publist { list-style: none; padding-left: 0; }
+    #pubs .publist {
+        max-height: 42rem;
+        overflow-y: auto;
+        padding: 4px 12px 4px 4px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fff;
+    }
+    #pubs .publist::-webkit-scrollbar { width: 8px; }
+    #pubs .publist::-webkit-scrollbar-thumb {
+        background: #cdd6ea;
+        border-radius: 8px;
+    }
+    #pubs .publist::-webkit-scrollbar-thumb:hover { background: #b3c0dd; }
+    #pubs .publist > li {
+        position: relative;
+        padding: 14px 16px 14px 18px;
+        margin-bottom: 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg-alt);
+        line-height: 1.6;
+        transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+    #pubs .publist > li:hover {
+        border-color: #cdd6ea;
+        box-shadow: 0 3px 14px rgba(30,50,90,.07);
+    }
+    #pubs .publist > li > a:first-child {
+        font-weight: 600;
+        color: var(--text);
+    }
+    #pubs .publist > li > a:first-child:hover { color: var(--accent); }
+    #pubs .publist li i {
+        display: inline-block;
+        font-style: normal;
+        font-size: .74rem;
+        font-weight: 600;
+        letter-spacing: .02em;
+        color: var(--tag-text);
+        background: var(--tag-bg);
+        padding: 2px 9px;
+        border-radius: 20px;
+        margin-top: 6px;
+    }
+    /* link-badges: [arxiv]/[paper]/[code] etc */
+    #pubs .publist li a:not(:first-child) {
+        font-size: .82rem;
+        color: var(--accent);
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    #pubs .publist li font[color="red"],
+    #pubs .publist li b font { color: #dc2626 !important; }
+
+    .authors { color: var(--text-soft); font-size: .95rem; }
+
+    /* Awards, education etc */
+    #honor li, #experience li, #service li { color: var(--text-soft); }
+
+    #footer {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 28px 32px 48px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        color: var(--muted);
+        font-size: .85rem;
+    }
+    #footer p { color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+        .layout {
+            flex-direction: column;
+            gap: 0;
+            padding: 0 20px;
+        }
+        .sidebar {
+            width: 100%;
+            flex-basis: auto;
+            position: static;
+            height: auto;
+            overflow: visible;
+            padding: 32px 0 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar .photo { width: 110px; height: 110px; }
+        .sidebar nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            border-top: 1px solid var(--border);
+        }
+        .sidebar nav a { padding: 6px 10px; border-left: none; }
+        .sidebar nav a:hover { border-left: none; }
+        main { max-width: 100%; padding: 32px 0 64px; }
+    }
+</style>
 </head>
 <body>
-<div class="content">
-    <header>
-        <img src="./theme/images/cd.jpeg" alt="me">
-        <h1>Deng Cai (蔡登)</h1>
-        <ul>
-            <li><a href="./blog/index.html" target="_black" >My blog</a></li>
-            <li><a href="./#experience">Experience</a></li>
-            <li><a href="./#honor">Awards</a></li>
-            <li><a href="./#code">Code</a></li>
-            <li><a href="./#pubs">Papers</a></li>
-            <li><a href="./shortbio.txt" target="_black">Bio</a></li>
-            <!--<li><a href="./cv.pdf" target="_black">CV(outdated)</a></li>-->
-        </ul>
-    </header>
+<div class="layout">
+    <aside class="sidebar">
+        <img class="photo" src="./theme/images/cd30.png" alt="Deng Cai">
+        <h1 class="name">Deng Cai (蔡登)</h1>
+        <p class="affil">(incoming) Associate Professor<br>
+        <a href="https://soai.sjtu.edu.cn/">School of Artificial Intelligence</a><br>
+        <a href="https://www.sjtu.edu.cn/">Shanghai Jiao Tong University</a></p>
+        <div class="socials">
+            <a href="mailto:thisisjcykcd@gmail.com" title="Email" aria-label="Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=KpbRLYcAAAAJ" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
+                <svg viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a href="https://github.com/jcyk" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+            </a>
+            <a href="https://x.com/deng_cai" target="_blank" rel="noopener" title="Twitter / X" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+        </div>
+        <nav>
+            <a href="#experience">Experience</a>
+            <a href="#honor">Awards</a>
+            <a href="#pubs">Papers</a>
+            <a href="#service">Professional Service</a>
+            <a href="#activities">Activities</a>
+            <a href="./index.html">Past</a>
+        </nav>
+    </aside>
+
+    <main>
 
 <section id="bio">
 
-<p>Research Scientist @ <a href="https://seed.bytedance.com/en">Bytedance Seed</a>. pushing the limit of artificial general intelligence.</p>
-
-<p><font color="#3498DB">We are hiring!</font></p>
-
-<p>Email: thisisjcykcd AT gmail.com </p>
-<details>
-<summary><b>Past</b></summary>
-I am a senior researcher at <a href="https://ai.tencent.com/ailab/nlp/en/index.html" target="_black">Tencent AI Lab</a>. My current research focuses on large language models <b><a href = "https://arxiv.org/abs/2406.16377" target="_black">[an incomplete summary of my personal views in mid 2023]</a></b>:
+<p>I am building a new research lab called <a href="">ContinuousAI Lab</a>. We believe in a future that AI systems must <b>continuously learn post-deployment</b>—accumulating knowledge and refining skills over time, and digesting as much context as their human collaborators, which enables truly effective and proactive interactions. To achieve this, our research is driven by three core pillars:</p>
 <ul>
-    <li>compute/data-efficient pretraining</li>
-    <li>generalist/specialist alignment</li>
-    <li>fast and quality decoding</li>
-    <li>multimodality/retrieval augmentation</li>
+    <li><b>Self-evolving algorithms</b>: Transforming transient experiences into durable knowledge and reusable skills, including autonomous environment exploration, dynamic training data synthesis, sample-efficient learning objectives, and robust mechanisms against catastrophic forgetting.</li>
+    <li><b>Long-context architectures</b>: Modeling ultra-long contexts effectively and efficiently through architectural innovation, ensuring that model capabilities grows as context length scales while keeping memory and compute requirements bounded.</li>
+    <li><b>Agentic memory systems</b>: Designing memory frameworks that govern how an agent organizes, stores, and retrieves information over its lifetime, enabling fast and accurate on-demand access.</li>
 </ul>
 
+<p class="recruit">I am recruiting PhD students, master students, and interns. If you'd like to work with me, please drop me an email with your CV!</p>
 
-I recieved my PhD from <a href="https://www.cuhk.edu.hk/english/index.html">The Chinese University of Hong Kong</a>, where I was advised by <a href="http://www1.se.cuhk.edu.hk/~textmine/" target="_black"> Prof. Wai Lam</a>. Before that, I was a MS student at <a href="https://www.sjtu.edu.cn/">Shanghai Jiao Tong University</a> supervised by <a href="http://bcmi.sjtu.edu.cn/~zhaohai" target="_black">Prof. Hai Zhao</a>. In the past, I also worked with <a href="https://ai.facebook.com/research/NLP/" target="_black">Meta AI</a>, <a href="https://aws.amazon.com/lex/" target="_black">Amazon AWS AI</a>, <a href="https://www.microsoft.com/en-us/research/group/natural-language-processing/" target="_black">Microsoft Research Redmond</a>, and <a href="https://damo.alibaba.com/labs/language-technology" target="_black">Alibaba DAMO Academy</a>.
+<p>Email: thisisjcykcd AT gmail.com </p>
+</section>
 
-
-<p>I have a broad interest in natural language processing and machine learning. My work has spanned from <i>fundamental language analysis</i> (e.g., semantic parsing) to <i>real-world NLP applications</i> (e.g., chatbots & translation). From a systematical view, my research is driven by the ultimate goal of building more interpretable and extensible AI systems. To achieve that, my research has revolved around <b>symbolic semantics and reasoning</b> (<a href="https://www.aclweb.org/anthology/2020.acl-main.119.pdf" target="_black">ACL20</a>, <a href="https://ojs.aaai.org//index.php/AAAI/article/view/6243" target="_black">AAAI20</a>, <a href="https://aclanthology.org/2021.findings-emnlp.99.pdf" target="_black">EMNLP21</a>), and <b>explicit and external memory</b> (<a href = "https://www.aclweb.org/anthology/N19-1124" target="_black">NAACL19</a>, <a href="https://www.aclweb.org/anthology/2020.emnlp-main.741.pdf" target="_black">EMNLP20</a>, <a href="https://arxiv.org/pdf/2105.11269.pdf" target="_black">ACL21</a>, <a href="https://openreview.net/pdf?id=CROlOA9Nd8C" target="_black">ICLR23</a>, <a href="https://openreview.net/pdf?id=oXYZJXDdo7" target="_black">ICLR24</a>)</p>
-</details>
-
-<br>
-<h2>Activities</h2>
+<section id="activities">
+    <h2>Activities</h2>
         <ul>
             <details open>
             <summary><b>Tutorials</b></summary>
             <li>Oct. 2025, Co-organize a <a href="https://ijcai-roleplay.github.io/">tutorial</a> on LLM Role-Playing and Hallucination at IJCAI 2025</li>
-            <!--<li>Oct. 2022, Tutorial Speaker, CCL2022</li> -->
             <li>Jul. 2022, Co-organize a <a href="https://jcyk.github.io/RetGenTutorial/">tutorial</a> on Retrieval-Augmented Text Generation at SIGIR 2022</li>
             <li>Jul. 2022, Co-organize a <a href="https://lemaoliu.github.io/retrieval-generation-tutorial/">tutorial</a> on Retrieval-Augmented Text Generation at IJCAI 2022</li>
             </details>
@@ -66,7 +345,6 @@ I recieved my PhD from <a href="https://www.cuhk.edu.hk/english/index.html">The 
             <li>Welcome submissions to the 1st Workshop on <a href="https://ctrlnlg.github.io/" target="_black">Taming Large Language Models</a> @ SIGDIAL 2023 & INLG 2023</li>
             <li>Nov. 2022, Invited Talk at Tsinghua University (hosted by Prof. Minlie Huang)</li>
             <li>Nov. 2022, Invited Talk at Technical University of Darmstadt (hosted by Prof. Iryna Gurevych)</li>
-            <!--<li>Oct. 2022, Session Chair, COLING2022</li>-->
             <li>Sep. 2022, Guest Speaker, NLPCC2022 Student Workshop</li>
             <li>Sep. 2022, Invited Talk at Central South University</li>
             <li>Sep. 2022, Invited Talk at Tsinghua University (hosted by Prof. Bowen Zhou)</li>
@@ -85,575 +363,21 @@ I recieved my PhD from <a href="https://www.cuhk.edu.hk/english/index.html">The 
         </ul>
 </section>
 
-
-<section id="pubs">
-    <h2>Papers (<a/ href="https://scholar.google.com/citations?user=KpbRLYcAAAAJ " target="_black">Google Scholar Profile</a>)</h2>
-    <p>(*: equal contribution, &#x2628;: correspondence)</p>
-    <details>
-    <summary><b>Selected Preprints</b></summary>
- <ul>
-
-   <li><a href = "https://arxiv.org/abs/2406.16377" target="_black">On the Transformations across Reward Model, Parameter Update, and In-Context Prompt</a ><a href = "https://arxiv.org/abs/2406.16377" target="_black"> [arxiv]</a>
-    <br>
-    <b>Deng Cai</b>, Huayang Li, Tingchen Fu, Siheng Li, Weiwen Xu, Shuaiyi Li, Bowen Cao, Zhisong Zhang, Xinting Huang, Leyang Cui, Yan Wang, Lemao Liu, Taro Watanabe, Shuming Shi
-    <br>
-    <i>arXiv</i>, 2024.
-    </li>
-
-   <li><a href = "https://arxiv.org/abs/2409.18786" target="_black">A Survey on the Honesty of Large Language Models</a ><a href = "https://arxiv.org/abs/2409.18786" target="_black"> [arxiv]</a>
-    <br>
-    Siheng Li, Cheng Yang, Taiqiang Wu, Chufan Shi, Yuji Zhang, Xinyu Zhu, Zesen Cheng, <b>Deng Cai</b>, Mo Yu, Lemao Liu, Jie Zhou, Yujiu Yang, Ngai Wong, Xixin Wu, Wai Lam
-    <br>
-    <i>arXiv</i>, 2024.
-    </li>
-
-   <li><a href = "https://github.com/inferflow/inferflow" target="_black">Inferflow: an Efficient and Highly Configurable Inference Engine for Large Language Models</a ><a href = "https://arxiv.org/pdf/2401.08294.pdf" target="_black"> [arxiv]</a><a href = "https://github.com/inferflow/inferflow" target="_black"> [code]</a >
-    <br>
-    Shuming Shi, Enbo Zhao, <b>Deng Cai</b>, Leyang Cui, Xinting Huang, Huayang Li
-    <br>
-    <i>arXiv</i>, 2023.
-    </li>
-
-    <li><a href="https://arxiv.org/pdf/2202.01110.pdf" target="_black">A Survey on Retrieval-Augmented Text Generation</a><a href = "https://arxiv.org/pdf/2202.01110.pdf" target="_black"> [arxiv]</a>
-    <br>
-    Huayang Li<sup>*</sup>, Yixuan Su<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Yan Wang<sup>*</sup>, Lemao Liu<sup>*</sup>
-    <br>
-    <i>arXiv</i>, 2022.
-    <br>
-    </li>
-    
-    <li><a href="https://arxiv.org/pdf/2012.11157.pdf" target="_black">Narrative Incoherence Detection</a><a href = "https://arxiv.org/pdf/2012.11157.pdf" target="_black"> [arxiv]</a>
-    <br>
-    <b>Deng Cai</b>, Yizhe Zhang, Yichen Huang, Wai Lam, Bill Dolan
-    <br>
-    <i>arXiv</i>, 2021.
-    <br>
-    </li>
-    <li><a href="https://arxiv.org/pdf/1901.06079.pdf" target="_black">Chinese Word Segmentation: Another Decade Review (2007-2017)</a>
-    <a href = "https://arxiv.org/pdf/1901.06079.pdf" target="_black">[arxiv]</a>   
-    <br>Zhao Hai, <b>Cai Deng</b>, Huang Changning, Kit Chunyu <br>
-    <i>ArXiv</i>, 2017.</li>
-    </ul>
-</details>
-<details open>
-    <summary><b>Selected Publications</b></summary>
-    <ul>
-
-    <li><a href = "https://arxiv.org/abs/2504.01707" target="_black">InfiniteICL: Breaking the Limit of Context Window Size via Long Short-term Memory Transformations</a >
-    <br>
-    Bowen Cao, <b>Deng Cai</b><sup>&#x2628;</sup>, Wai Lam
-    <br>
-    <i>ACL 2025 (Findings)</i>
-    </li>
-
-    <li><a href = "https://arxiv.org/abs/2505.14116" target="_black">Self-Reasoning Language Models: Unfold Hidden Reasoning Chains with Few Reasoning Catalyst</a >
-    <br>
-    Hongru Wang, <b>Deng Cai</b>, Wanjun Zhong, Shijue Huang, Jeff Z. Pan, Zeming Liu, Kam-Fai Wong
-    <br>
-    <i>ACL 2025 (Findings)</i>
-    </li>
-
-    <li><a href = "https://ojs.aaai.org/index.php/AAAI/article/view/34590" target="_black">Empowering Self-Learning of LLMs: Inner Knowledge Explicitation as a Catalyst</a >
-    <br>
-    Shijue Huang, Wanjun Zhong, <b>Deng Cai</b>, Fanqi Wan, Chengyi Wang, Mingxuan Wang, Mu Qiao, Ruifeng Xu
-    <br>
-    <i>AAAI 2025</i>
-    </li>
-
-    <li><a href = "" target="_black">On the Worst Prompt Performance of Large Language Models</a ><a href = "https://arxiv.org/abs/2406.10248" target="_black"> [arxiv]</a>
-    <br>
-    Bowen Cao, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhisong Zhang, Yuexian Zou, Wai Lam
-    <br>
-    <i>NeurIPS 2024</i>
-    </li>
-
-    <li><a href = "" target="_black">StrategyLLM: Large Language Models as Strategy Generators, Executors, Optimizers, and Evaluators for Problem Solving</a ><a href = "https://arxiv.org/pdf/2311.08803.pdf" target="_black"> [arxiv]</a >
-    <br>
-    Chang Gao, Haiyun Jiang, <b>Deng Cai</b>, Shuming Shi, Wai Lam
-    <br>
-    <i>NeurIPS 2024</i>
-    </li>
-
-    <li><a href = "" target="_black">Unchosen Experts Can Contribute Too: Unleashing MoE Models’ Power by Self-Contrast</a ><a href = "https://arxiv.org/pdf/2405.14507" target="_black"> [arxiv]</a >
-    <br>
-    Chufan Shi, Cheng Yang, Xinyu Zhu, Jiahao Wang, Taiqiang Wu, Siheng Li, <b>Deng Cai</b>, Yujiu Yang, Yu Meng
-    <br>
-    <i>NeurIPS 2024</i>
-    </li>
-
-    <li><a href = "" target="_black">GLBench: A Comprehensive Benchmark for Graph with Large Language Models</a >
-    <br>
-    Yuhan Li, Peisong Wang, Xiao Zhu, Aochuan Chen, Haiyun Jiang, <b>Deng Cai</b>, Victor Wai Kin Chan, Jia Li
-    <br>
-    <i>NeurIPS 2024 (Datasets and Benchmarks)</i>
-    </li>
-
-    <li><a href = "" target="_black">A Thorough Examination of Decoding Methods in the Era of LLMs</a ><a href = "https://arxiv.org/pdf/2402.06925.pdf" target="_black"> [arxiv]</a>
-    <br>
-    Chufan Shi<sup>*</sup>, Haoran Yang<sup>*</sup>, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhisong Zhang, Yifan Wang, Yujiu Yang, Wai Lam
-    <br>
-    <i>EMNLP 2024</i>
-    </li>
-
-    <li><a href = "" target="_black">Consecutive Batch Model Editing with HooK Layers</a >
-    <br>
-    Shuaiyi Li, Yang Deng, <b>Deng Cai</b>, Hongyuan Lu, Liang Chen, Wai Lam
-    <br>
-    <i>EMNLP 2024</i>
-    </li>
-
-    <li><a href = "" target="_black">Cross-lingual Contextualized Phrase Retrieval</a >
-    <br>
-    Huayang Li, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhi Qu, Qu Cui, Hidetaka Kamigaito, Lemao Liu, Taro Watanabe
-    <br>
-    <i>EMNLP 2024 (Findings)</i>
-    </li>
-
-    <li><a href = "" target="_black">Not All Preference Pairs Are Created Equal: A Recipe for Annotation-Efficient Iterative Preference Learning</a >
-    <br>
-    Sen Yang, Leyang Cui, <b>Deng Cai</b>, Xinting Huang, Shuming Shi, Wai Lam
-    <br>
-    <i>EMNLP 2024 (Findings)</i>
-    </li>
-
-    <li><a href = "" target="_black">With Greater Text Comes Greater Necessarily: Inference-Time Training Helps Long Text Generation</a >
-    <br>
-    Yan Wang<sup>*</sup>, DM<sup>*</sup>, <b>Deng Cai</b>
-    <br>
-    <i>COLM 2024</i>
-    </li>
-
-    <li><a href="https://arxiv.org/abs/2311.16511" target="_black">GPT4Video: A Unified Multimodal Large Language Model for lnstruction-Followed Understanding and Safety-Aware Generation</a><a href="https://arxiv.org/abs/2311.16511" target="_black"> [arxiv]</a>
-    <br>
-    Zhanyu Wang, Longyue Wang, Zhen Zhao, Minghao Wu, Chenyang Lyu, Huayang Li, <b>Deng Cai</b>, Luping Zhou, Shuming Shi, Zhaopeng Tu
-    <br>
-    <i>ACM MM 2024</i>
-    <br>
-    <b><font color="red">Best Paper Nomination (26/4340)</font></b>
-    </li>
-
-    <li><a href = "" target="_black">Reasons to Reject? Aligning Language Models with Judgments</a ><a href = "https://arxiv.org/pdf/2312.14591.pdf" target="_black"> [arxiv]</a>
-    <br>
-    Weiwen Xu, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhisong Zhang, Wai Lam, Shuming Shi
-    <br>
-    <i>ACL 2024 (Findings)</i>
-    </li>
-
-    <li><a href = "https://textbind.github.io/" target="_black">TextBind: Multi-turn Interleaved Multimodal Instruction-following in the Wild</a ><a href = "https://textbind.github.io/" target="_black"> [blog]</a ><a href = "https://ailabnlp.tencent.com/research_demos/textbind/" target="_black"> [demo]</a ><a href = "http://arxiv.org/abs/2309.08637" target="_black"> [arxiv]</a ><a href = "https://github.com/SihengLi99/TextBind" target="_black"> [code]</a >
-    <br>
-    Huayang Li<sup>*</sup>, Siheng Li<sup>*</sup>, <b>Deng Cai</b><sup>*,&#x2628;</sup>, Longyue Wang, Lemao Liu, Taro Watanabe, Yujiu Yang, Shuming Shi
-    <br>
-    <i>ACL 2024 (Findings)</i>
-    </li>
-
-    <li><a href = "" target="_black">Disperse-Then-Merge: Pushing the Limits of Instruction Tuning via Alignment Tax Reduction</a ><a href = "https://arxiv.org/abs/2405.13432" target="_black"> [arxiv]</a>
-    <br>
-    Tingchen Fu, <b>Deng Cai</b><sup>&#x2628;</sup>, Lemao Liu, Shuming Shi, Rui Yan
-    <br>
-    <i>ACL 2024 (Findings)</i>
-    </li>
-
-
-    <li><a href = "" target="_black">WatME: Towards Lossless Watermarking Through Lexical Redundancy</a ><a href = "https://arxiv.org/abs/2311.09832" target="_black"> [arxiv]</a>
-    <br>
-    Liang Chen, Yatao Bian, Yang Deng, <b>Deng Cai</b>, Shuaiyi Li, Peilin Zhao, Kam-fai Wong
-    <br>
-    <i>ACL 2024</i>
-    </li>
-
-
-    <li><a href="" target="_black">A Frustratingly Simple Decoding Method for Neural Text Generation</a><a href = "https://arxiv.org/abs/2305.12675" target="_black"> [arxiv]</a>
-    <br>
-    Haoran Yang, <b>Deng Cai</b><sup>&#x2628;</sup>, Huayang Li, Wei Bi, Wai Lam, Shuming Shi
-    <br>
-    <i>COLING 2024</i>
-    <br>
-    </li>
-
-    <li><a href="https://openreview.net/pdf?id=oXYZJXDdo7" target="_black">Retrieval is Accurate Generation</a><a href = "https://openreview.net/pdf?id=oXYZJXDdo7" target="_black"> [paper]</a>
-    <br>
-    Bowen Cao, <b>Deng Cai</b><sup>&#x2628;</sup>, Leyang Cui, Xuxin Cheng, Wei Bi, Yuexian Zou, Shuming Shi
-    <br>
-    <i>ICLR 2024</i>
-    <br>
-    </li>
-
-    <li><a href="https://openreview.net/pdf?id=3KDbIWT26J" target="_black">The Reasonableness Behind Unreasonable Translation Capability of Large Language Model</a><a href = "https://openreview.net/pdf?id=3KDbIWT26J" target="_black"> [paper]</a>
-    <br>
-    Tingchen Fu, Lemao Liu, <b>Deng Cai</b>, Guoping Huang, Shuming Shi, Rui Yan
-    <br>
-    <i>ICLR 2024</i>
-    <br>
-    </li>
-
-    <li><a href="https://openreview.net/pdf?id=jiDsk12qcz" target="_black">Knowledge Fusion of Large Language Models</a><a href = "https://openreview.net/pdf?id=jiDsk12qcz" target="_black"> [paper]</a>
-    <br>
-    Fanqi Wan, Xinting Huang, <b>Deng Cai</b>, Xiaojun Quan, Wei Bi, Shuming Shi
-    <br>
-    <i>ICLR 2024</i>
-    <br>
-    </li>
-    
-    <li><a href="https://aclanthology.org/2023.emnlp-main.947.pdf" target="_black">Specialist or Generalist? Instruction Tuning for Specific NLP Tasks</a><a href = "https://aclanthology.org/2023.emnlp-main.947.pdf" target="_black"> [paper]</a>
-    <br>
-    Chufan Shi, Yixuan Su, Cheng Yang, Yujiu Yang, <b>Deng Cai</b><sup>&#x2628;</sup>
-    <br>
-    <i>EMNLP 2023</i>
-    <br>
-    </li>
-
-    <li><a href="https://arxiv.org/pdf/2211.06869.pdf" target="_black">Large Language Models Meet Harry Potter: A Bilingual Dataset for Aligning Dialogue Agents with Characters</a><a href = "https://arxiv.org/pdf/2211.06869.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2023.findings-emnlp.570.pdf" target="_black"> [paper]</a>
-    <br>
-    Nuo Chen, Yan Wang, Haiyun Jiang, <b>Deng Cai</b>, Yuhan Li, Ziyang Chen, Longyue Wang, Jia Li
-    <br>
-    <i>EMNLP 2023 (Findings)</i>
-    <br>
-    </li>
-
-
-    <li><a href="https://openreview.net/pdf?id=WjgCRrOgip" target="_black">Repetition In Repetition Out: Towards Understanding Neural Text Degeneration from the Data Perspective</a><a href = "https://arxiv.org/pdf/2310.10226.pdf" target="_black"> [arxiv]</a><a href = "https://openreview.net/pdf?id=WjgCRrOgip" target="_black"> [paper]</a><a href = "https://github.com/gmftbyGMFTBY/Rep-Dropout" target="_black"> [code]</a>
-    <br>
-    Huayang Li, Tian Lan, Zihao Fu, <b>Deng Cai</b>, Lemao Liu, Nigel Collier, Taro Watanabe, Yixuan Su
-    <br>
-    <i>NeurIPS 2023</i>
-    <br>
-    </li>
-
-    <li><a href = "https://panda-gpt.github.io/" target="_black">PandaGPT: One Model To Instruction-Follow Them All</a ><a href = "https://panda-gpt.github.io/" target="_black"> [blog]</a ><a href = "https://huggingface.co/spaces/GMFTBY/PandaGPT" target="_black"> [demo]</a ><a href = "http://arxiv.org/abs/2305.16355" target="_black"> [arxiv]</a ><a href = "https://github.com/yxuansu/PandaGPT" target="_black"> [code]</a >
-    <br>
-    Yixuan Su<sup>*</sup>, Tian Lan<sup>*</sup>, Huayang Li<sup>*</sup>, Jialu Xu, Yan Wang, <b>Deng Cai</b><sup>*,&#x2628;</sup>
-    <br>
-    <i>TLLM Workshop 2023</i>
-    </li>
-
-
-    <li><a href="https://aclanthology.org/2023.acl-demo.49.pdf" target="_black">Effidit: An Assistant for Improving Writing Efficiency</a><a href="https://aclanthology.org/2023.acl-demo.49.pdf"> [paper]</a ><a href="https://effidit.qq.com/en"> [demo]</a >
-    <br>
-    Tencent AI Lab
-    <br>
-    <i>ACL 2023 (Demo)</i>
-    <br>
-    </li>
-
-    <li><a href="https://openreview.net/pdf?id=CROlOA9Nd8C" target="_black">Copy is All You Need</a><a href = "https://openreview.net/pdf?id=CROlOA9Nd8C" target="_black"> [paper]</a>
-    <br>
-    Tian Lan<sup>*</sup>, <b>Deng Cai</b><sup>*,&#x2628;</sup>, Yan Wang, Heyan Huang, Xian-Ling Mao
-    <br>
-    <i>ICLR 2023</i>
-    <br>
-    </li>
-
-    <li><a href="https://aclanthology.org/2022.emnlp-main.433/" target="_black">Retrofitting Multilingual Sentence Embeddings with Abstract Meaning Representation</a><a href = "https://arxiv.org/pdf/2210.09773.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.emnlp-main.433.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/MSE-AMR" target="_black"> [code]</a>
-    <br>
-    <b>Deng Cai</b>, Xin Li, Jackie Chun-Sing Ho, Lidong Bing, Wai Lam
-    <br>
-    <i>EMNLP 2022</i>
-    <br>
-    </li>
-
-    <li><a href="https://aclanthology.org/2022.emnlp-main.24/" target="_black">Linearizing Transformer with Key-Value Memory</a><a href = "https://arxiv.org/pdf/2203.12644.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.emnlp-main.24.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/memsizer" target="_black"> [code]</a>
-    <br>
-    Yizhe Zhang<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>
-    <br>
-    <i>EMNLP 2022</i>
-    <br>
-    </li>
-
-    <li><a href="https://aclanthology.org/2022.findings-emnlp.109/" target="_black">N-gram Is Back: Residual Learning of Neural Text Generation with n-gram Language Model</a><a href = "https://arxiv.org/pdf/2210.14431.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.findings-emnlp.109.pdf" target="_black"> [paper]</a>
-    <br>
-    Huayang Li, <b>Deng Cai</b>, Jin Xu, Taro Watanabe
-    <br>
-    <i>EMNLP 2022 (Findings)</i>
-    <br>
-    </li>
-
-    <li><a href="https://openreview.net/pdf?id=4cdxptfCCg" target="_black">Measuring and Reducing Model Update Regression in Structured Prediction for NLP</a><a href = "https://arxiv.org/pdf/2202.02976.pdf" target="_black"> [arxiv]</a><a href = "https://www.amazon.science/blog/preventing-updated-nlp-models-from-backsliding-on-particular-tasks" target="_black"> [blog]</a><a href = "https://openreview.net/pdf?id=4cdxptfCCg" target="_black"> [paper]</a>
-    <br>
-    <b>Deng Cai</b>, Elman Mansimov, Yi-An Lai, Yixuan Su, Lei Shu, Yi Zhang
-    <br>
-    <i>NeurIPS 2022</i>
-    <br>
-    </li>
-
-    <li><a href="https://arxiv.org/pdf/2206.02369.pdf" target="_black">Learning to Break the Loop: Analyzing and Mitigating Repetitions for Neural Text Generation</a><a href = "https://arxiv.org/pdf/2202.02976.pdf" target="_black"> [arxiv]</a>
-    <br>
-    Jin Xu, Xiaojiang Liu, Jianhao Yan, <b>Deng Cai</b>, Huayang Li, Jian Li
-    <br>
-    <i>NeurIPS 2022</i>
-    <br>
-    </li>
-
-    <li><a href="https://dl.acm.org/doi/abs/10.1145/3477495.3532682" target="_black">Recent Advances in Retrieval-Augmented Text Generation</a>
-    <br>
-    <b>Deng Cai</b>, Yan Wang, Lemao Liu, Shuming Shi
-    <br>
-    <i>SIGIR 2022 (Tutorial)</i>
-    <br>
-    </li>
-
-    <li><a href="" target="_black">Recent Advances in Retrieval-Augmented Text Generation</a>
-    <br>
-    <b>Deng Cai</b>, Yan Wang, Lemao Liu, Shuming Shi
-    <br>
-    <i>IJCAI 2022 (Tutorial)</i>
-    <br>
-    </li>
-
-    <!--<li><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2022/feng22c_interspeech.pdf" target="_black"> ASR-Robust Natural Language Understanding on ASR-GLUE Dataset</a><a href = "https://www.isca-speech.org/archive/pdfs/interspeech_2022/feng22c_interspeech.pdf" target="_black"> [paper]</a>
-    <br>
-    Lingyun Feng, Jianwei Yu, <b>Deng Cai</b>, Songxiang Liu, Haitao Zheng, Yan Wang
-
-    <br>
-    <i>INTERSPEECH 2022</i>
-    <br>
-    </li>
-
-    <li><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2022/dai22_interspeech.pdf" target="_black">Automatic Prosody Annotation with Pre-Trained Text-Speech Model</a><a href = "https://arxiv.org/pdf/2206.07956.pdf" target="_black"> [arxiv]</a><a href = "https://www.isca-speech.org/archive/pdfs/interspeech_2022/dai22_interspeech.pdf" target="_black"> [paper]</a><a href = "https://github.com/daisyqk/automatic-prosody-annotation" target="_black"> [code]</a>
-    <br>
-    Ziqian Dai, Jianwei Yu, Yan Wang, Nuo Chen, Yanyao Bian, GuangZhi Li, <b>Deng Cai</b>, Dong Yu
-    <br>
-    <i>INTERSPEECH 2022</i>
-    <br>
-    </li>-->
-
-    <li><a href="https://aclanthology.org/2022.acl-long.319/" target="_black">Multi-Task Pre-Training for Plug-and-Play Task-Oriented Dialogue System</a><a href = "https://arxiv.org/pdf/2109.14739.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.acl-long.319/" target="_black"> [paper]</a><a href = "https://github.com/awslabs/pptod" target="_black"> [code]</a>
-    <br>
-    Yixuan Su, Lei Shu, Elman Mansimov, Arshit Gupta, <b>Deng Cai</b>, Yi-An Lai, Yi Zhang
-    <br>
-    <i>ACL 2022</i>
-    <br>
-    </li>
-      
-    <li><a href="https://aclanthology.org/2021.findings-emnlp.237.pdf" target="_black">Multilingual AMR Parsing with Noisy Knowledge Distillation</a><a href = "https://arxiv.org/pdf/2109.15196.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-emnlp.237.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/XAMR" target="_black"> [code]</a>
-    <br>
-    <b>Deng Cai</b>, Xin Li, Jackie Chun-Sing Ho, Lidong Bing, Wai Lam
-    <br>
-    <i>EMNLP 2021 (Findings)</i>
-    <br>
-    </li>
-
-    <li><a href="https://aclanthology.org/2021.findings-emnlp.99.pdf" target="_black">Exploiting Reasoning Chains for Multi-hop Science Question Answering</a><a href = "https://arxiv.org/pdf/2109.02905.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-emnlp.99.pdf" target="_black"> [paper]</a><a href = "https://github.com/wwxu21/CGR" target="_black"> [code]</a>
-    <br>
-    Weiwen Xu, Yang Deng, Huihui Zhang, <b>Deng Cai</b>, Wai Lam
-    <br>
-    <i>EMNLP 2021 (Findings)</i>
-    <br>
-    </li>
-    
-    <li><a href="https://arxiv.org/pdf/2105.11269.pdf" target="_black">Neural Machine Translation with Monolingual Translation Memory</a><a href = "https://arxiv.org/pdf/2105.11269.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.acl-long.567/" target="_black"> [paper]</a><a href = "https://github.com/jcyk/copyisallyouneed" target="_black"> [code]</a><a href = "./acl2021.pdf" target="_black"> [slides]</a>
-    <br>
-    <b>Deng Cai</b>, Yan Wang, Huayang Li, Wai Lam, Lemao Liu
-    <br>
-    <i>ACL 2021</i>
-    <br>
-    <b><font color="red">Outstanding Paper Award (6/3350)</font></b>
-    </li>
-    
-    <li><a href="https://aclanthology.org/2021.acl-long.137.pdf" target="_black">Dialogue Response Selection with Hierarchical Curriculum Learning</a><a href = "https://arxiv.org/pdf/2012.14756.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.acl-long.137/" target="_black"> [paper]</a><a href = "https://github.com/yxuansu/HCL" target="_black"> [code]</a>
-    <br>
-    Yixuan Su<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Qingyu Zhou, Zibo Lin, Simon Baker, Yunbo Cao, Shuming Shi, Nigel Collier, Yan Wang
-    <br>
-    <i>ACL 2021</i>
-    </li>
-    
-    <li><a href="https://aclanthology.org/2021.findings-acl.90.pdf" target="_black">Dynamic Semantic Graph Construction and Reasoning for Explainable Multi-hop Question Answering</a><a href = "https://arxiv.org/pdf/2105.11776.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-acl.90/" target="_black"> [paper]</a><a href = "https://github.com/wwxu21/AMR-SG" target="_black"> [code]</a>
-    <br>
-    Weiwen Xu, Huihui Zhang, <b>Deng Cai</b>, Wai Lam
-    <br>
-    <i>ACL 2021 (Findings)</i>
-    </li>
-
-    <li><a href="https://aclanthology.org/2021.findings-acl.193.pdf" target="_black">Assessing Dialogue Systems with Distribution Distances</a><a href = "https://arxiv.org/pdf/2105.02573.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-acl.193/" target="_black"> [paper]</a><a href = "https://github.com/yhlleo/frechet-bert-distance" target="_black"> [code]</a>
-    <br>
-    Jiannan Xiang<sup>*</sup>, Yahui Liu<sup>*</sup>, <b>Deng Cai</b>, Huayang Li, Defu Lian, Lemao Liu
-    <br>
-    <i>ACL 2021 (Findings)</i>
-    </li>
-
-
-    <li><a href="https://www.aclweb.org/anthology/2021.eacl-main.18.pdf" target="_black">Non-Autoregressive Text Generation with Pre-trained Language Models</a><a href = "https://arxiv.org/pdf/2102.08220.pdf" target="_black"> [arxiv]</a><a href="https://www.aclweb.org/anthology/2021.eacl-main.18.pdf" target="_black"> [paper]</a>
-    <br>
-    Yixuan Su, <b>Deng Cai</b>, Yan Wang, David Vandyke, Simon Baker, Piji Li, Nigel Collier
-    <br>
-    <i>EACL 2021</i>
-    </li>
-        
-    <li><a href = "https://www.aclweb.org/anthology/2020.emnlp-main.741.pdf" target="_black">The World is Not Binary: Learning to Rank with Grayscale Data for Dialogue Response Selection</a><a href = "https://arxiv.org/pdf/2004.02421.pdf" target="_black"> [arxiv]</a><a href = "https://www.aclweb.org/anthology/2020.emnlp-main.741.pdf" target="_black"> [paper]</a>
-    <br>
-    Zibo Lin<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Yan Wang, Xiaojiang Liu, Hai-Tao Zheng, Shuming Shi
-    <br>
-    <i>EMNLP 2020</i>
-    </li>
-    
-    <li><a href="https://arxiv.org/pdf/2008.04200.pdf" target="_black">Describe What to Change: A Text-guided Unsupervised Image-to-Image Translation Approach</a><a href="https://arxiv.org/pdf/2008.04200.pdf" target="_black"> [arxiv]</a>
-    <br>
-    Yahui Liu, Marco De Nadai, <b>Deng Cai</b>, Huayang Li, Xavier Alameda-Pineda, Nicu Sebe, Bruno Lepri
-    <br>
-    <i>ACM MM 2020</i>
-    </li>
-    
-    <li><a href="https://www.aclweb.org/anthology/2020.acl-main.119.pdf" target="_black">AMR Parsing via Graph-Sequence Iterative Inference</a><a href = "https://arxiv.org/pdf/2004.05572.pdf" target="_black"> [arxiv]</a><a href="https://www.aclweb.org/anthology/2020.acl-main.119.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/AMR-gs" target="_black"> [code]</a><a href = "./acl2020.pdf" target="_black"> [slides]</a>
-    <br>
-    <b>Deng Cai</b>, Wai Lam
-    <br>
-    <i>ACL 2020</i>
-    </li>
-    
-    <li><a href="https://ojs.aaai.org//index.php/AAAI/article/view/6243" target="_black">Graph Transformer for Graph-to-Sequence Learning</a>
-    <a href = "https://arxiv.org/pdf/1911.07470.pdf" target="_black"> [arxiv]</a><a href =https://aaai.org/Papers/AAAI/2020GB/AAAI-CaiD.6741.pdf target="_black"> [paper]</a><a href = "https://github.com/jcyk/gtos" target="_black"> [code]</a><a href = "./aaai2020.pdf" target="_black"> [slides]</a>
-    <br>
-    <b>Deng Cai</b>, Wai Lam
-    <br>
-    <i>AAAI 2020</i>
-    </li>
-    
-    <li><a href = "https://www.aclweb.org/anthology/D19-1393.pdf" target="_black">Core Semantic First: A Top-down Approach for AMR Parsing</a>
-    <a href = "https://arxiv.org/pdf/1909.04303.pdf" target="_black"> [arxiv]</a><a href = "https://www.aclweb.org/anthology/D19-1393.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/AMR-parser" target="_black"> [code]</a><a href = "./emnlp2019.pdf" target="_black"> [slides]</a>
-    <br>
-    <b>Deng Cai</b>, Wai Lam
-    <br>
-    <i>EMNLP 2019</i>
-    </li>
-    
-    <li><a href = "https://www.aclweb.org/anthology/D19-1195.pdf" target="_black">Retrieval-guided Dialogue Response Generation via a Matching-to-Generation Framework</a>
-    <a href = "https://www.aclweb.org/anthology/D19-1195.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/seqgen" target="_black"> [code]</a>
-    <br>
-    <b>Deng Cai</b>, Yan Wang, Wei Bi, Zhaopeng Tu, Xiaojiang Liu, Shuming Shi
-    <br>
-    <i>EMNLP 2019</i>
-    </li>
-    
-    <li><a href = "https://www.aclweb.org/anthology/D19-1667.pdf" target="_black">Charge-Based Prison Term Prediction with Deep Gating Network</a>
-    <a href = "https://arxiv.org/pdf/1908.11521.pdf" target="_black"> [arxiv]</a><br>
-    Huajie Chen<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Wei Dai, Zehui Dai, Yadong Ding
-    <br>
-    <i>EMNLP 2019</i>
-    </li>
-    
-    <li><a href = "https://www.aclweb.org/anthology/N19-1124" target="_black">Skeleton-to-Response: Dialogue Generation Guided by Retrieval Memory</a>
-    <a href = "https://arxiv.org/pdf/1809.05296.pdf" target="_black"> [arxiv]</a><a href = "https://www.aclweb.org/anthology/N19-1124" target="_black"> [paper]</a><a href = "https://github.com/jcyk/Skeleton-to-Response" target="_black"> [code]</a><a href = "./naacl2019.pdf" target="_black"> [slides]</a>
-    <br>
-    <b>Deng Cai</b>, Yan Wang, Wei Bi, Zhaopeng Tu, Xiaojiang Liu, Wai Lam, Shuming Shi
-    <br>
-    <i>NAACL 2019</i>
-    </li>
-    
-    <li><a href = "https://ojs.aaai.org//index.php/AAAI/article/view/4704" target="_black">Unsupervised Learning helps Supervised Neural Word Segmentation</a>
-    <a href = "https://bcmi.sjtu.edu.cn/~zhaohai/pubs/aaai2019-ucws-1202.pdf" target="_black"> [preprint]</a>
-    <br>
-    Xiaobin Wang, <b>Deng Cai</b>, Guangwei Xu, Hai Zhao, Linlin Li, Luo Si
-    <br>
-    <i>AAAI 2019</i>
-    </li>
-    
-    <li><a href = "http://aclweb.org/anthology/D18-1132" target="_black">Translating a Math Word Problem to a Expression Tree</a>
-    <a href = "http://aclweb.org/anthology/D18-1132" target="_black"> [paper]</a>
-    <br>
-    Lei Wang, Yan Wang, <b>Deng Cai</b>, Dongxiang Zhang, Xiaojiang Liu
-    <br>
-    <i>EMNLP 2018</i>
-    </li>
-    
-    <li><a href = "http://www.aclweb.org/anthology/P/P17/P17-2096.pdf" target="_black">Fast and Accurate Neural Word Segmentation for Chinese</a>
-    <a href = "http://www.aclweb.org/anthology/P/P17/P17-2096.pdf" target="_black"> [paper]</a> <a href = "https://github.com/jcyk/greedyCWS" target="_black"> [code]</a>
-    <br><b>Deng Cai</b>, Hai Zhao, Zhisong Zhang, Yuan Xin, Yongjian Wu, Feiyue Huang
-    <br>
-    <i>ACL 2017</i>
-    </li>
-    
-    <li><a href = "http://www.aclweb.org/anthology/P/P16/P16-1039.pdf" target="_black">Neural Word Segmentation Learning for Chinese</a>
-    <a href = "http://www.aclweb.org/anthology/P/P16/P16-1039.pdf" target="_black"> [paper]</a> <a href = "https://github.com/jcyk/CWS" target="_black"> [code]</a><a href = "./acl2016.pdf" target="_black"> [slides]</a>
-    <br>
-    <b>Deng Cai</b>, Hai Zhao
-    <br>
-    <i>ACL 2016</i>
-    </li>
-
-
-    <li><a href="https://ieeexplore.ieee.org/abstract/document/11526967/" target="_black">SeqPE: Transformer with Sequential Position Encoding</a><a href="https://arxiv.org/abs/2506.13277" target="_black"> [arxiv]</a>
-    <br>
-    Huayang Li, Yahui Liu, Hongyu Sun, <b>Deng Cai</b>, Leyang Cui, Wei Bi, Peilin Zhao, Taro Watanabe
-    <br>
-    <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i>, 2026.
-    <br>
-    </li>
-
-    <li><a href="https://arxiv.org/pdf/2309.01219.pdf" target="_black">Siren's Song in the AI Ocean: A Survey on Hallucination in Large Language Models</a><a href="https://arxiv.org/pdf/2309.01219.pdf" target="_black"> [arxiv]</a>
-    <br>
-    Yue Zhang, Yafu Li, Leyang Cui, <b>Deng Cai</b>, Lemao Liu, Tingchen Fu, Xinting Huang, Enbo Zhao, Yu Zhang, Yulong Chen, Longyue Wang, Anh Tuan Luu, Wei Bi, Freda Shi, Shuming Shi
-    <br>
-    <i>Computational Linguistics</i>, 2025.
-    <br>
-    </li>
-
-
-    <li><a href ="" target="_black">Exploring Dense Retrieval for Dialogue Response Selection</a>
-    <br>
-    Tian Lan, <b>Deng Cai</b><sup>&#x2628;</sup>, Yan Wang, Yixuan Su, Heyan Huang, Xian-Ling Mao<br>
-    <i>ACM Transactions on Information Systems</i>, 2023.</li>
-
-    <li><a href = "https://ieeexplore.ieee.org/document/9449993" target="_black">PROTOTYPE-TO-STYLE: Dialogue Generation With Style-Aware Editing on Retrieval Memory </a>
-    <br>
-    Yixuan Su, Yan Wang, <b>Deng Cai</b>, Simon Baker, Anna Korhonen, Nigel Collier<br>
-    <i>IEEE Transactions on Audio, Speech and Language Processing</i>, 2021. </li>
-    
-    <li><a href = "https://ieeexplore.ieee.org/document/9108255" target="_black">Neural Machine Translation with Noisy Lexical Constraints </a>
-    <br>
-    Huayang Li, Guoping Huang, <b>Deng Cai</b>, Lemao Liu<br>
-    <i>IEEE Transactions on Audio, Speech and Language Processing</i>, 2020.</li>
-    
-    <li><a href = "https://dl.acm.org/doi/pdf/10.1145/3047405" target="_black">A Hybrid Model for Chinese Spelling Check </a>
-    <a href = "https://dl.acm.org/doi/pdf/10.1145/3047405" target="_black"> [paper]</a>
-    <br>
-    <b>Deng Cai</b><sup>*</sup>, Hai Zhao<sup>*</sup>, Yang Xin, Yuzhu Wang, Zhongye Jia<br>
-    <i>ACM Transactions on Asian and Low-Resource Language Information Process</i>, 2017.
-    </li>
-    </ul>
-</section>
-<section id="code">
-    <h2>Open Source Projects (<a/ href="https://github.com/jcyk " target="_black">Github Profile</a>)</h2>
-    <ul>
-        (Most of my research work are open-sourced. Here are some additional projects.)
-        <li><a href="https://github.com/jcyk/BERT" target="_black">BERT</a><br>A simple yet complete implementation of the popular BERT model, tested on large-scale distributed environment (more than <b>80GPUs</b>). Its variant is adpoted by Tencent. </li>
-        <li><a href="https://github.com/clab/dynet" target="_black">Dynet</a><br> I used to contribute actively to Dynet. A list of my contributions can be found <a href="https://github.com/clab/dynet/commits?author=jcyk" target="_black"> here</a>. </li>
-        <li><a href="https://github.com/jcyk/Dynet-Biaffine-dependency-parser" target="_black">Biaffine Dependency Parser</a> <br> A Dynet implementation of the popular <a href="https://arxiv.org/pdf/1611.01734.pdf" target="_black">biaffine dependency parser</a>, achieving state-of-the-art performance. <b>Much simpler</b> than the original tensorflow code. I played around many domain adaptation methods on this model.</li>
-        <li><a href="https://github.com/jcyk/IDRC" target="_black">Implicit Discourse Relation Classification</a><br>Pair-aware sentence modeling for Implicit Discourse Relation Classification. A summary of this work: <a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-60045-1_47.pdf" target="_black">[paper]</a></li>
-    </ul>
-    </details>
-</section>
 <section id="honor">
     <h2>Selected Awards and Honors</h2>
     <ul>
-        <li >ACM MM-2024 Best Paper Nomination</li>
-        <li ><a href="https://www.cast.org.cn/xw/tzgg/KJCX/art/2023/art_649cdfb63f244abb9aa4035a0f14b18d.html">Young Elite Scientist Sponsorship Program</a>, China Association for Science and Technology, 2023 （中国科协青年人才托举工程）</li>
-        <li >EACL-2023 Outstanding Reviewer</li>
-        <li >ACL-2021 Outstanding Paper</li>
-        <li >EMNLP-2020 Outstanding Reviewer</li>
-        <li >AAAI-2020 Scholarship Award</li>
-        <li >National Scholarship for Graduate Student (top 2% students), Ministry of Education of P.R.China, 2016</li>
-        <li >Excellent Undergraduate Thesis Award, XMU, 2015</li>
-        <li >Dean's List, 2014, School of Information Science and Engineering, XMU, 2014</li>
-        <li >Gold Medal, The 5-th Fujian Provincial University Programming Contest,  2014</li>
-        <li >Bronze Medal, ACM-ICPC Asia Regional Programming Contest, 2013 </li>
+        <li>ACM MM-2024 Best Paper Nomination</li>
+        <li><a href="https://www.cast.org.cn/xw/tzgg/KJCX/art/2023/art_649cdfb63f244abb9aa4035a0f14b18d.html">Young Elite Scientist Sponsorship Program</a>, China Association for Science and Technology, 2023</li>
+        <li>EACL-2023 Outstanding Reviewer</li>
+        <li>ACL-2021 Outstanding Paper</li>
+        <li>EMNLP-2020 Outstanding Reviewer</li>
+        <li>AAAI-2020 Scholarship Award</li>
+        <li>National Scholarship for Graduate Student (top 2% students), Ministry of Education of P.R.China, 2016</li>
+        <li>Excellent Undergraduate Thesis Award, XMU, 2015</li>
+        <!--<li>Dean's List, 2014, School of Information Science and Engineering, XMU, 2014</li>-->
+        <li>Gold Medal, The 5-th Fujian Provincial University Programming Contest,  2014</li>
+        <li>Bronze Medal, ACM-ICPC Asia Regional Programming Contest, 2013 </li>
     </ul>
-</section>
-<section id="experience">
-    <h2>Education</h2>
-        <ul>
-        <li>Aug. 2018 - Jul. 2022<br>
-        <b>PhD</b>, Dept. of Systems Engineering and Engineering Management, <a href="https://www.cuhk.edu.hk/english/index.html">The Chinese University of Hong Kong</a></li>
-        <li>Sep. 2015 - Mar. 2018<br>
-        <b>MS</b>, Dept. of Computer Science, <a href="https://www.sjtu.edu.cn/">Shanghai Jiao Tong University</a></li>
-        <li>Sep. 2011 - Jun. 2015<br>
-        <b>BE</b>, Dept. of Computer Science, <a href="https://www.xmu.edu.cn/">Xiamen University</a></li>
-        </ul>
-    <h2>Research Experience</h2>
-        <ul>
-        <li>summer 2021, <b>Applied scientist intern</b> with <a href="http://mansimov.io/">Elman Mansimov</a> and Yi Zhang<br> <a href="https://aws.amazon.com/lex/" target="_black">Amazon AWS AI</a>, Seattle (remote)</li>
-        <li>spring 2021, <b>Research intern</b> with <a href="https://dreasysnail.github.io/">Yizhe Zhang</a>, Michel Galley, and Bill Dolan<br> <a href="https://www.microsoft.com/en-us/research/group/natural-language-processing/" target="_black">Microsoft Research</a>, Redmond (remote)</li>
-        <li> 2018 - 2020, <b>Student Researcher</b> with NLP Center led by Shuming Shi<br> <a href="https://ai.tencent.com/ailab/nlp/en/index.html" target="_black">Tencent AI Lab</a>, Shenzhen</li>
-        <li>Jan. 2018 - Mar. 2018, <b>Research intern</b> with Xiaobin Wang, Guangwei Xu, and Linlin Li<br> <a href="https://damo.alibaba.com/labs/language-technology" target="_black">Alibaba DAMO Academy</a>, Hangzhou</li>
-        <li>Jul. 2017 - Dec. 2017, <b>Visiting scholar</b>, Advisor: <a href="https://frcchang.github.io/" target="_black"> Prof. Yue Zhang</a><br> <a href="https://www.sutd.edu.sg/">Singapore University of Technology and Design</a>, Singapore</li>
 </section>
 
 <section id="service">
@@ -662,28 +386,557 @@ I recieved my PhD from <a href="https://www.cuhk.edu.hk/english/index.html">The 
    <b>Area Chair</b>:
    <li>COLING(2022), ACL(2024), EMNLP(2024), NAACL(2025), ACL Rolling Review(2024-), NeurIPS(2025), ICML(2026), ICLR(2026)</li>
    <b>Program Committee Member/Reviewer</b>:
-   <li >ACL Rolling Review(2021-), ACL(2017-2023), EMNLP(2019-2023), NAACL(2021)</li>
-   <li >NeurIPS(2022-2024), ICML(2022-2024), ICLR(2023-2024), AAAI(2020-2022), SIGKDD(2022-2023), WSDM(2022-2023)</li>
-   <li >COLING(2016, 2018, 2020, 2022), AACL(2020, 2022-2023), EACL(2017, 2021, 2023), LREC(2018, 2020, 2022), INLG(2019-2021), etc</li>
+   <li>ACL Rolling Review(2021-), ACL(2017-2023), EMNLP(2019-2023), NAACL(2021)</li>
+   <li>NeurIPS(2022-2024), ICML(2022-2024), ICLR(2023-2024), AAAI(2020-2022), SIGKDD(2022-2023), WSDM(2022-2023)</li>
+   <li>COLING(2016, 2018, 2020, 2022), AACL(2020, 2022-2023), EACL(2017, 2021, 2023), LREC(2018, 2020, 2022), INLG(2019-2021), etc</li>
    <b>Journal Reviewer</b>:
-   <li >Computational Linguistics</li>
-   <li >IEEE Transactions on Pattern Analysis and Machine Intelligence</li>
-   <li >ACM Transactions on Information Systems</li>
-   <li >IEEE Transactions on Audio, Speech and Language Processing</li>
-   <li >Neurocomputing</li>
-   <li >Pattern Analysis and Applications</li>
+   <li>Computational Linguistics</li>
+   <li>IEEE Transactions on Pattern Analysis and Machine Intelligence</li>
+   <li>ACM Transactions on Information Systems</li>
+   <li>IEEE Transactions on Audio, Speech and Language Processing</li>
+   <li>Neurocomputing</li>
+   <li>Pattern Analysis and Applications</li>
 </ul>
 </section>
-<section id="miscellaneous">
-    <h2>Miscellaneous</h2>
-    <ul>
-        <i>
-        <!--<li > I am creating a perfomance ranking list on the task of Chinese Word Segmentaion (check out <a href= "https://jcyk.github.io/cws_rankings/" >here</a>). </li>-->
-        <li> <a href = "http://codeforces.com/profile/ross"> What?!</a> I remember clearly, last time I played the game, I was an <b>international master</b>.</li>
-        <li > I cannot swim well because my density is too large.</li>
-        <i>
-    </ul>
+
+<section id="experience">
+    <h2>Experience</h2>
+    <h3 class="subhead">Employment</h3>
+        <ul>
+        <!--<li>Research Scientist, <a href="https://machinelearning.apple.com/">Apple Foundation Model</a></li>-->
+        <li>Research Scientist, <a href="https://seed.bytedance.com/en">Bytedance Seed</a></li>
+        <li>Senior Researcher, <a href="https://ai.tencent.com/ailab/nlp/en/index.html" target="_black">Tencent AI Lab</a></li>
+        </ul>
+    <h3 class="subhead">Education</h3>
+        <ul>
+        <li>Aug. 2018 - Jul. 2022<br>
+        PhD, Dept. of Systems Engineering and Engineering Management, <a href="https://www.cuhk.edu.hk/english/index.html">The Chinese University of Hong Kong</a></li>
+        <li>Sep. 2015 - Mar. 2018<br>
+        MS, Dept. of Computer Science, <a href="https://www.sjtu.edu.cn/">Shanghai Jiao Tong University</a></li>
+        <li>Sep. 2011 - Jun. 2015<br>
+        BE, Dept. of Computer Science, <a href="https://www.xmu.edu.cn/">Xiamen University</a></li>
+        </ul>
+    <h3 class="subhead">Internship</h3>
+        <ul>
+        <li>summer 2021, Applied scientist intern with <a href="http://mansimov.io/">Elman Mansimov</a> and Yi Zhang<br> <a href="https://aws.amazon.com/lex/" target="_black">Amazon AWS AI</a>, Seattle (remote)</li>
+        <li>spring 2021, Research intern with <a href="https://dreasysnail.github.io/">Yizhe Zhang</a>, Michel Galley, and Bill Dolan<br> <a href="https://www.microsoft.com/en-us/research/group/natural-language-processing/" target="_black">Microsoft Research</a>, Redmond (remote)</li>
+        <li> 2018 - 2020, Student Researcher with NLP Center led by Shuming Shi<br> <a href="https://ai.tencent.com/ailab/nlp/en/index.html" target="_black">Tencent AI Lab</a>, Shenzhen</li>
+        <li>Jan. 2018 - Mar. 2018, Research intern with Xiaobin Wang, Guangwei Xu, and Linlin Li<br> <a href="https://damo.alibaba.com/labs/language-technology" target="_black">Alibaba DAMO Academy</a>, Hangzhou</li>
+        <li>Jul. 2017 - Dec. 2017, Visiting scholar, Advisor: <a href="https://frcchang.github.io/" target="_black"> Prof. Yue Zhang</a><br> <a href="https://www.sutd.edu.sg/">Singapore University of Technology and Design</a>, Singapore</li>
+        </ul>
 </section>
+
+
+<section id="pubs">
+    <h2>Papers (<a href="https://scholar.google.com/citations?user=KpbRLYcAAAAJ " target="_black">Google Scholar Profile</a>)</h2>
+    <p class="pub-note">(*: equal contribution, &#x2628;: correspondence)</p>
+    <details>
+    <summary><b>Preprints</b></summary>
+ <ul class="publist">
+
+   <li><a href = "https://arxiv.org/abs/2406.16377" target="_black">On the Transformations across Reward Model, Parameter Update, and In-Context Prompt</a ><a href = "https://arxiv.org/abs/2406.16377" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Huayang Li, Tingchen Fu, Siheng Li, Weiwen Xu, Shuaiyi Li, Bowen Cao, Zhisong Zhang, Xinting Huang, Leyang Cui, Yan Wang, Lemao Liu, Taro Watanabe, Shuming Shi</span>
+    <br>
+    <i>arXiv</i>, 2024.
+    </li>
+
+   <li><a href = "https://arxiv.org/abs/2409.18786" target="_black">A Survey on the Honesty of Large Language Models</a ><a href = "https://arxiv.org/abs/2409.18786" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Siheng Li, Cheng Yang, Taiqiang Wu, Chufan Shi, Yuji Zhang, Xinyu Zhu, Zesen Cheng, <b>Deng Cai</b>, Mo Yu, Lemao Liu, Jie Zhou, Yujiu Yang, Ngai Wong, Xixin Wu, Wai Lam</span>
+    <br>
+    <i>arXiv</i>, 2024.
+    </li>
+
+   <li><a href = "https://github.com/inferflow/inferflow" target="_black">Inferflow: an Efficient and Highly Configurable Inference Engine for Large Language Models</a ><a href = "https://arxiv.org/pdf/2401.08294.pdf" target="_black"> [arxiv]</a><a href = "https://github.com/inferflow/inferflow" target="_black"> [code]</a >
+    <br>
+    <span class="authors">Shuming Shi, Enbo Zhao, <b>Deng Cai</b>, Leyang Cui, Xinting Huang, Huayang Li</span>
+    <br>
+    <i>arXiv</i>, 2023.
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2202.01110.pdf" target="_black">A Survey on Retrieval-Augmented Text Generation</a><a href = "https://arxiv.org/pdf/2202.01110.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Huayang Li<sup>*</sup>, Yixuan Su<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Yan Wang<sup>*</sup>, Lemao Liu<sup>*</sup></span>
+    <br>
+    <i>arXiv</i>, 2022.
+    <br>
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2012.11157.pdf" target="_black">Narrative Incoherence Detection</a><a href = "https://arxiv.org/pdf/2012.11157.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Yizhe Zhang, Yichen Huang, Wai Lam, Bill Dolan</span>
+    <br>
+    <i>arXiv</i>, 2021.
+    <br>
+    </li>
+    <li><a href="https://arxiv.org/pdf/1901.06079.pdf" target="_black">Chinese Word Segmentation: Another Decade Review (2007-2017)</a>
+    <a href = "https://arxiv.org/pdf/1901.06079.pdf" target="_black">[arxiv]</a>
+    <br><span class="authors">Zhao Hai, <b>Cai Deng</b>, Huang Changning, Kit Chunyu</span> <br>
+    <i>ArXiv</i>, 2017.</li>
+    </ul>
+</details>
+<details open>
+    <summary><b>Publications</b></summary>
+    <ul class="publist">
+
+    <li><a href = "https://arxiv.org/abs/2504.01707" target="_black">InfiniteICL: Breaking the Limit of Context Window Size via Long Short-term Memory Transformations</a >
+    <br>
+    <span class="authors">Bowen Cao, <b>Deng Cai</b><sup>&#x2628;</sup>, Wai Lam</span>
+    <br>
+    <i>ACL 2025 (Findings)</i>
+    </li>
+
+    <li><a href = "https://arxiv.org/abs/2505.14116" target="_black">Self-Reasoning Language Models: Unfold Hidden Reasoning Chains with Few Reasoning Catalyst</a >
+    <br>
+    <span class="authors">Hongru Wang, <b>Deng Cai</b>, Wanjun Zhong, Shijue Huang, Jeff Z. Pan, Zeming Liu, Kam-Fai Wong</span>
+    <br>
+    <i>ACL 2025 (Findings)</i>
+    </li>
+
+    <li><a href = "https://ojs.aaai.org/index.php/AAAI/article/view/34590" target="_black">Empowering Self-Learning of LLMs: Inner Knowledge Explicitation as a Catalyst</a >
+    <br>
+    <span class="authors">Shijue Huang, Wanjun Zhong, <b>Deng Cai</b>, Fanqi Wan, Chengyi Wang, Mingxuan Wang, Mu Qiao, Ruifeng Xu</span>
+    <br>
+    <i>AAAI 2025</i>
+    </li>
+
+    <li><a href = "" target="_black">On the Worst Prompt Performance of Large Language Models</a ><a href = "https://arxiv.org/abs/2406.10248" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Bowen Cao, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhisong Zhang, Yuexian Zou, Wai Lam</span>
+    <br>
+    <i>NeurIPS 2024</i>
+    </li>
+
+    <li><a href = "" target="_black">StrategyLLM: Large Language Models as Strategy Generators, Executors, Optimizers, and Evaluators for Problem Solving</a ><a href = "https://arxiv.org/pdf/2311.08803.pdf" target="_black"> [arxiv]</a >
+    <br>
+    <span class="authors">Chang Gao, Haiyun Jiang, <b>Deng Cai</b>, Shuming Shi, Wai Lam</span>
+    <br>
+    <i>NeurIPS 2024</i>
+    </li>
+
+    <li><a href = "" target="_black">Unchosen Experts Can Contribute Too: Unleashing MoE Models’ Power by Self-Contrast</a ><a href = "https://arxiv.org/pdf/2405.14507" target="_black"> [arxiv]</a >
+    <br>
+    <span class="authors">Chufan Shi, Cheng Yang, Xinyu Zhu, Jiahao Wang, Taiqiang Wu, Siheng Li, <b>Deng Cai</b>, Yujiu Yang, Yu Meng</span>
+    <br>
+    <i>NeurIPS 2024</i>
+    </li>
+
+    <li><a href = "" target="_black">GLBench: A Comprehensive Benchmark for Graph with Large Language Models</a >
+    <br>
+    <span class="authors">Yuhan Li, Peisong Wang, Xiao Zhu, Aochuan Chen, Haiyun Jiang, <b>Deng Cai</b>, Victor Wai Kin Chan, Jia Li</span>
+    <br>
+    <i>NeurIPS 2024 (Datasets and Benchmarks)</i>
+    </li>
+
+    <li><a href = "" target="_black">A Thorough Examination of Decoding Methods in the Era of LLMs</a ><a href = "https://arxiv.org/pdf/2402.06925.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Chufan Shi<sup>*</sup>, Haoran Yang<sup>*</sup>, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhisong Zhang, Yifan Wang, Yujiu Yang, Wai Lam</span>
+    <br>
+    <i>EMNLP 2024</i>
+    </li>
+
+    <li><a href = "" target="_black">Consecutive Batch Model Editing with HooK Layers</a >
+    <br>
+    <span class="authors">Shuaiyi Li, Yang Deng, <b>Deng Cai</b>, Hongyuan Lu, Liang Chen, Wai Lam</span>
+    <br>
+    <i>EMNLP 2024</i>
+    </li>
+
+    <li><a href = "" target="_black">Cross-lingual Contextualized Phrase Retrieval</a >
+    <br>
+    <span class="authors">Huayang Li, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhi Qu, Qu Cui, Hidetaka Kamigaito, Lemao Liu, Taro Watanabe</span>
+    <br>
+    <i>EMNLP 2024 (Findings)</i>
+    </li>
+
+    <li><a href = "" target="_black">Not All Preference Pairs Are Created Equal: A Recipe for Annotation-Efficient Iterative Preference Learning</a >
+    <br>
+    <span class="authors">Sen Yang, Leyang Cui, <b>Deng Cai</b>, Xinting Huang, Shuming Shi, Wai Lam</span>
+    <br>
+    <i>EMNLP 2024 (Findings)</i>
+    </li>
+
+    <li><a href = "" target="_black">With Greater Text Comes Greater Necessarily: Inference-Time Training Helps Long Text Generation</a >
+    <br>
+    <span class="authors">Yan Wang<sup>*</sup>, DM<sup>*</sup>, <b>Deng Cai</b></span>
+    <br>
+    <i>COLM 2024</i>
+    </li>
+
+    <li><a href="https://arxiv.org/abs/2311.16511" target="_black">GPT4Video: A Unified Multimodal Large Language Model for lnstruction-Followed Understanding and Safety-Aware Generation</a><a href="https://arxiv.org/abs/2311.16511" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Zhanyu Wang, Longyue Wang, Zhen Zhao, Minghao Wu, Chenyang Lyu, Huayang Li, <b>Deng Cai</b>, Luping Zhou, Shuming Shi, Zhaopeng Tu</span>
+    <br>
+    <i>ACM MM 2024</i>
+    <br>
+    <b><font color="red">Best Paper Nomination (26/4340)</font></b>
+    </li>
+
+    <li><a href = "" target="_black">Reasons to Reject? Aligning Language Models with Judgments</a ><a href = "https://arxiv.org/pdf/2312.14591.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Weiwen Xu, <b>Deng Cai</b><sup>&#x2628;</sup>, Zhisong Zhang, Wai Lam, Shuming Shi</span>
+    <br>
+    <i>ACL 2024 (Findings)</i>
+    </li>
+
+    <li><a href = "https://textbind.github.io/" target="_black">TextBind: Multi-turn Interleaved Multimodal Instruction-following in the Wild</a ><a href = "https://textbind.github.io/" target="_black"> [blog]</a ><a href = "https://ailabnlp.tencent.com/research_demos/textbind/" target="_black"> [demo]</a ><a href = "http://arxiv.org/abs/2309.08637" target="_black"> [arxiv]</a ><a href = "https://github.com/SihengLi99/TextBind" target="_black"> [code]</a >
+    <br>
+    <span class="authors">Huayang Li<sup>*</sup>, Siheng Li<sup>*</sup>, <b>Deng Cai</b><sup>*,&#x2628;</sup>, Longyue Wang, Lemao Liu, Taro Watanabe, Yujiu Yang, Shuming Shi</span>
+    <br>
+    <i>ACL 2024 (Findings)</i>
+    </li>
+
+    <li><a href = "" target="_black">Disperse-Then-Merge: Pushing the Limits of Instruction Tuning via Alignment Tax Reduction</a ><a href = "https://arxiv.org/abs/2405.13432" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Tingchen Fu, <b>Deng Cai</b><sup>&#x2628;</sup>, Lemao Liu, Shuming Shi, Rui Yan</span>
+    <br>
+    <i>ACL 2024 (Findings)</i>
+    </li>
+
+
+    <li><a href = "" target="_black">WatME: Towards Lossless Watermarking Through Lexical Redundancy</a ><a href = "https://arxiv.org/abs/2311.09832" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Liang Chen, Yatao Bian, Yang Deng, <b>Deng Cai</b>, Shuaiyi Li, Peilin Zhao, Kam-fai Wong</span>
+    <br>
+    <i>ACL 2024</i>
+    </li>
+
+
+    <li><a href="" target="_black">A Frustratingly Simple Decoding Method for Neural Text Generation</a><a href = "https://arxiv.org/abs/2305.12675" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Haoran Yang, <b>Deng Cai</b><sup>&#x2628;</sup>, Huayang Li, Wei Bi, Wai Lam, Shuming Shi</span>
+    <br>
+    <i>COLING 2024</i>
+    <br>
+    </li>
+
+    <li><a href="https://openreview.net/pdf?id=oXYZJXDdo7" target="_black">Retrieval is Accurate Generation</a><a href = "https://openreview.net/pdf?id=oXYZJXDdo7" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Bowen Cao, <b>Deng Cai</b><sup>&#x2628;</sup>, Leyang Cui, Xuxin Cheng, Wei Bi, Yuexian Zou, Shuming Shi</span>
+    <br>
+    <i>ICLR 2024</i>
+    <br>
+    </li>
+
+    <li><a href="https://openreview.net/pdf?id=3KDbIWT26J" target="_black">The Reasonableness Behind Unreasonable Translation Capability of Large Language Model</a><a href = "https://openreview.net/pdf?id=3KDbIWT26J" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Tingchen Fu, Lemao Liu, <b>Deng Cai</b>, Guoping Huang, Shuming Shi, Rui Yan</span>
+    <br>
+    <i>ICLR 2024</i>
+    <br>
+    </li>
+
+    <li><a href="https://openreview.net/pdf?id=jiDsk12qcz" target="_black">Knowledge Fusion of Large Language Models</a><a href = "https://openreview.net/pdf?id=jiDsk12qcz" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Fanqi Wan, Xinting Huang, <b>Deng Cai</b>, Xiaojun Quan, Wei Bi, Shuming Shi</span>
+    <br>
+    <i>ICLR 2024</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2023.emnlp-main.947.pdf" target="_black">Specialist or Generalist? Instruction Tuning for Specific NLP Tasks</a><a href = "https://aclanthology.org/2023.emnlp-main.947.pdf" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Chufan Shi, Yixuan Su, Cheng Yang, Yujiu Yang, <b>Deng Cai</b><sup>&#x2628;</sup></span>
+    <br>
+    <i>EMNLP 2023</i>
+    <br>
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2211.06869.pdf" target="_black">Large Language Models Meet Harry Potter: A Bilingual Dataset for Aligning Dialogue Agents with Characters</a><a href = "https://arxiv.org/pdf/2211.06869.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2023.findings-emnlp.570.pdf" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Nuo Chen, Yan Wang, Haiyun Jiang, <b>Deng Cai</b>, Yuhan Li, Ziyang Chen, Longyue Wang, Jia Li</span>
+    <br>
+    <i>EMNLP 2023 (Findings)</i>
+    <br>
+    </li>
+
+
+    <li><a href="https://openreview.net/pdf?id=WjgCRrOgip" target="_black">Repetition In Repetition Out: Towards Understanding Neural Text Degeneration from the Data Perspective</a><a href = "https://arxiv.org/pdf/2310.10226.pdf" target="_black"> [arxiv]</a><a href = "https://openreview.net/pdf?id=WjgCRrOgip" target="_black"> [paper]</a><a href = "https://github.com/gmftbyGMFTBY/Rep-Dropout" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Huayang Li, Tian Lan, Zihao Fu, <b>Deng Cai</b>, Lemao Liu, Nigel Collier, Taro Watanabe, Yixuan Su</span>
+    <br>
+    <i>NeurIPS 2023</i>
+    <br>
+    </li>
+
+    <li><a href = "https://panda-gpt.github.io/" target="_black">PandaGPT: One Model To Instruction-Follow Them All</a ><a href = "https://panda-gpt.github.io/" target="_black"> [blog]</a ><a href = "https://huggingface.co/spaces/GMFTBY/PandaGPT" target="_black"> [demo]</a ><a href = "http://arxiv.org/abs/2305.16355" target="_black"> [arxiv]</a ><a href = "https://github.com/yxuansu/PandaGPT" target="_black"> [code]</a >
+    <br>
+    <span class="authors">Yixuan Su<sup>*</sup>, Tian Lan<sup>*</sup>, Huayang Li<sup>*</sup>, Jialu Xu, Yan Wang, <b>Deng Cai</b><sup>*,&#x2628;</sup></span>
+    <br>
+    <i>TLLM Workshop 2023</i>
+    </li>
+
+
+    <li><a href="https://aclanthology.org/2023.acl-demo.49.pdf" target="_black">Effidit: An Assistant for Improving Writing Efficiency</a><a href="https://aclanthology.org/2023.acl-demo.49.pdf"> [paper]</a ><a href="https://effidit.qq.com/en"> [demo]</a >
+    <br>
+    <span class="authors">Tencent AI Lab</span>
+    <br>
+    <i>ACL 2023 (Demo)</i>
+    <br>
+    </li>
+
+    <li><a href="https://openreview.net/pdf?id=CROlOA9Nd8C" target="_black">Copy is All You Need</a><a href = "https://openreview.net/pdf?id=CROlOA9Nd8C" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Tian Lan<sup>*</sup>, <b>Deng Cai</b><sup>*,&#x2628;</sup>, Yan Wang, Heyan Huang, Xian-Ling Mao</span>
+    <br>
+    <i>ICLR 2023</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2022.emnlp-main.433/" target="_black">Retrofitting Multilingual Sentence Embeddings with Abstract Meaning Representation</a><a href = "https://arxiv.org/pdf/2210.09773.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.emnlp-main.433.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/MSE-AMR" target="_black"> [code]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Xin Li, Jackie Chun-Sing Ho, Lidong Bing, Wai Lam</span>
+    <br>
+    <i>EMNLP 2022</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2022.emnlp-main.24/" target="_black">Linearizing Transformer with Key-Value Memory</a><a href = "https://arxiv.org/pdf/2203.12644.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.emnlp-main.24.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/memsizer" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Yizhe Zhang<sup>*</sup>, <b>Deng Cai</b><sup>*</sup></span>
+    <br>
+    <i>EMNLP 2022</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2022.findings-emnlp.109/" target="_black">N-gram Is Back: Residual Learning of Neural Text Generation with n-gram Language Model</a><a href = "https://arxiv.org/pdf/2210.14431.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.findings-emnlp.109.pdf" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Huayang Li, <b>Deng Cai</b>, Jin Xu, Taro Watanabe</span>
+    <br>
+    <i>EMNLP 2022 (Findings)</i>
+    <br>
+    </li>
+
+    <li><a href="https://openreview.net/pdf?id=4cdxptfCCg" target="_black">Measuring and Reducing Model Update Regression in Structured Prediction for NLP</a><a href = "https://arxiv.org/pdf/2202.02976.pdf" target="_black"> [arxiv]</a><a href = "https://www.amazon.science/blog/preventing-updated-nlp-models-from-backsliding-on-particular-tasks" target="_black"> [blog]</a><a href = "https://openreview.net/pdf?id=4cdxptfCCg" target="_black"> [paper]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Elman Mansimov, Yi-An Lai, Yixuan Su, Lei Shu, Yi Zhang</span>
+    <br>
+    <i>NeurIPS 2022</i>
+    <br>
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2206.02369.pdf" target="_black">Learning to Break the Loop: Analyzing and Mitigating Repetitions for Neural Text Generation</a><a href = "https://arxiv.org/pdf/2202.02976.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Jin Xu, Xiaojiang Liu, Jianhao Yan, <b>Deng Cai</b>, Huayang Li, Jian Li</span>
+    <br>
+    <i>NeurIPS 2022</i>
+    <br>
+    </li>
+
+    <li><a href="https://dl.acm.org/doi/abs/10.1145/3477495.3532682" target="_black">Recent Advances in Retrieval-Augmented Text Generation</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Yan Wang, Lemao Liu, Shuming Shi</span>
+    <br>
+    <i>SIGIR 2022 (Tutorial)</i>
+    <br>
+    </li>
+
+    <li><a href="" target="_black">Recent Advances in Retrieval-Augmented Text Generation</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Yan Wang, Lemao Liu, Shuming Shi</span>
+    <br>
+    <i>IJCAI 2022 (Tutorial)</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2022.acl-long.319/" target="_black">Multi-Task Pre-Training for Plug-and-Play Task-Oriented Dialogue System</a><a href = "https://arxiv.org/pdf/2109.14739.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2022.acl-long.319/" target="_black"> [paper]</a><a href = "https://github.com/awslabs/pptod" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Yixuan Su, Lei Shu, Elman Mansimov, Arshit Gupta, <b>Deng Cai</b>, Yi-An Lai, Yi Zhang</span>
+    <br>
+    <i>ACL 2022</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2021.findings-emnlp.237.pdf" target="_black">Multilingual AMR Parsing with Noisy Knowledge Distillation</a><a href = "https://arxiv.org/pdf/2109.15196.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-emnlp.237.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/XAMR" target="_black"> [code]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Xin Li, Jackie Chun-Sing Ho, Lidong Bing, Wai Lam</span>
+    <br>
+    <i>EMNLP 2021 (Findings)</i>
+    <br>
+    </li>
+
+    <li><a href="https://aclanthology.org/2021.findings-emnlp.99.pdf" target="_black">Exploiting Reasoning Chains for Multi-hop Science Question Answering</a><a href = "https://arxiv.org/pdf/2109.02905.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-emnlp.99.pdf" target="_black"> [paper]</a><a href = "https://github.com/wwxu21/CGR" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Weiwen Xu, Yang Deng, Huihui Zhang, <b>Deng Cai</b>, Wai Lam</span>
+    <br>
+    <i>EMNLP 2021 (Findings)</i>
+    <br>
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2105.11269.pdf" target="_black">Neural Machine Translation with Monolingual Translation Memory</a><a href = "https://arxiv.org/pdf/2105.11269.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.acl-long.567/" target="_black"> [paper]</a><a href = "https://github.com/jcyk/copyisallyouneed" target="_black"> [code]</a><a href = "./acl2021.pdf" target="_black"> [slides]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Yan Wang, Huayang Li, Wai Lam, Lemao Liu</span>
+    <br>
+    <i>ACL 2021</i>
+    <br>
+    <b><font color="red">Outstanding Paper Award (6/3350)</font></b>
+    </li>
+
+    <li><a href="https://aclanthology.org/2021.acl-long.137.pdf" target="_black">Dialogue Response Selection with Hierarchical Curriculum Learning</a><a href = "https://arxiv.org/pdf/2012.14756.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.acl-long.137/" target="_black"> [paper]</a><a href = "https://github.com/yxuansu/HCL" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Yixuan Su<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Qingyu Zhou, Zibo Lin, Simon Baker, Yunbo Cao, Shuming Shi, Nigel Collier, Yan Wang</span>
+    <br>
+    <i>ACL 2021</i>
+    </li>
+
+    <li><a href="https://aclanthology.org/2021.findings-acl.90.pdf" target="_black">Dynamic Semantic Graph Construction and Reasoning for Explainable Multi-hop Question Answering</a><a href = "https://arxiv.org/pdf/2105.11776.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-acl.90/" target="_black"> [paper]</a><a href = "https://github.com/wwxu21/AMR-SG" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Weiwen Xu, Huihui Zhang, <b>Deng Cai</b>, Wai Lam</span>
+    <br>
+    <i>ACL 2021 (Findings)</i>
+    </li>
+
+    <li><a href="https://aclanthology.org/2021.findings-acl.193.pdf" target="_black">Assessing Dialogue Systems with Distribution Distances</a><a href = "https://arxiv.org/pdf/2105.02573.pdf" target="_black"> [arxiv]</a><a href = "https://aclanthology.org/2021.findings-acl.193/" target="_black"> [paper]</a><a href = "https://github.com/yhlleo/frechet-bert-distance" target="_black"> [code]</a>
+    <br>
+    <span class="authors">Jiannan Xiang<sup>*</sup>, Yahui Liu<sup>*</sup>, <b>Deng Cai</b>, Huayang Li, Defu Lian, Lemao Liu</span>
+    <br>
+    <i>ACL 2021 (Findings)</i>
+    </li>
+
+
+    <li><a href="https://www.aclweb.org/anthology/2021.eacl-main.18.pdf" target="_black">Non-Autoregressive Text Generation with Pre-trained Language Models</a><a href = "https://arxiv.org/pdf/2102.08220.pdf" target="_black"> [arxiv]</a><a href="https://www.aclweb.org/anthology/2021.eacl-main.18.pdf" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Yixuan Su, <b>Deng Cai</b>, Yan Wang, David Vandyke, Simon Baker, Piji Li, Nigel Collier</span>
+    <br>
+    <i>EACL 2021</i>
+    </li>
+
+    <li><a href = "https://www.aclweb.org/anthology/2020.emnlp-main.741.pdf" target="_black">The World is Not Binary: Learning to Rank with Grayscale Data for Dialogue Response Selection</a><a href = "https://arxiv.org/pdf/2004.02421.pdf" target="_black"> [arxiv]</a><a href = "https://www.aclweb.org/anthology/2020.emnlp-main.741.pdf" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Zibo Lin<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Yan Wang, Xiaojiang Liu, Hai-Tao Zheng, Shuming Shi</span>
+    <br>
+    <i>EMNLP 2020</i>
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2008.04200.pdf" target="_black">Describe What to Change: A Text-guided Unsupervised Image-to-Image Translation Approach</a><a href="https://arxiv.org/pdf/2008.04200.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Yahui Liu, Marco De Nadai, <b>Deng Cai</b>, Huayang Li, Xavier Alameda-Pineda, Nicu Sebe, Bruno Lepri</span>
+    <br>
+    <i>ACM MM 2020</i>
+    </li>
+
+    <li><a href="https://www.aclweb.org/anthology/2020.acl-main.119.pdf" target="_black">AMR Parsing via Graph-Sequence Iterative Inference</a><a href = "https://arxiv.org/pdf/2004.05572.pdf" target="_black"> [arxiv]</a><a href="https://www.aclweb.org/anthology/2020.acl-main.119.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/AMR-gs" target="_black"> [code]</a><a href = "./acl2020.pdf" target="_black"> [slides]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Wai Lam</span>
+    <br>
+    <i>ACL 2020</i>
+    </li>
+
+    <li><a href="https://ojs.aaai.org//index.php/AAAI/article/view/6243" target="_black">Graph Transformer for Graph-to-Sequence Learning</a>
+    <a href = "https://arxiv.org/pdf/1911.07470.pdf" target="_black"> [arxiv]</a><a href =https://aaai.org/Papers/AAAI/2020GB/AAAI-CaiD.6741.pdf target="_black"> [paper]</a><a href = "https://github.com/jcyk/gtos" target="_black"> [code]</a><a href = "./aaai2020.pdf" target="_black"> [slides]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Wai Lam</span>
+    <br>
+    <i>AAAI 2020</i>
+    </li>
+
+    <li><a href = "https://www.aclweb.org/anthology/D19-1393.pdf" target="_black">Core Semantic First: A Top-down Approach for AMR Parsing</a>
+    <a href = "https://arxiv.org/pdf/1909.04303.pdf" target="_black"> [arxiv]</a><a href = "https://www.aclweb.org/anthology/D19-1393.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/AMR-parser" target="_black"> [code]</a><a href = "./emnlp2019.pdf" target="_black"> [slides]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Wai Lam</span>
+    <br>
+    <i>EMNLP 2019</i>
+    </li>
+
+    <li><a href = "https://www.aclweb.org/anthology/D19-1195.pdf" target="_black">Retrieval-guided Dialogue Response Generation via a Matching-to-Generation Framework</a>
+    <a href = "https://www.aclweb.org/anthology/D19-1195.pdf" target="_black"> [paper]</a><a href = "https://github.com/jcyk/seqgen" target="_black"> [code]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Yan Wang, Wei Bi, Zhaopeng Tu, Xiaojiang Liu, Shuming Shi</span>
+    <br>
+    <i>EMNLP 2019</i>
+    </li>
+
+    <li><a href = "https://www.aclweb.org/anthology/D19-1667.pdf" target="_black">Charge-Based Prison Term Prediction with Deep Gating Network</a>
+    <a href = "https://arxiv.org/pdf/1908.11521.pdf" target="_black"> [arxiv]</a><br>
+    <span class="authors">Huajie Chen<sup>*</sup>, <b>Deng Cai</b><sup>*</sup>, Wei Dai, Zehui Dai, Yadong Ding</span>
+    <br>
+    <i>EMNLP 2019</i>
+    </li>
+
+    <li><a href = "https://www.aclweb.org/anthology/N19-1124" target="_black">Skeleton-to-Response: Dialogue Generation Guided by Retrieval Memory</a>
+    <a href = "https://arxiv.org/pdf/1809.05296.pdf" target="_black"> [arxiv]</a><a href = "https://www.aclweb.org/anthology/N19-1124" target="_black"> [paper]</a><a href = "https://github.com/jcyk/Skeleton-to-Response" target="_black"> [code]</a><a href = "./naacl2019.pdf" target="_black"> [slides]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Yan Wang, Wei Bi, Zhaopeng Tu, Xiaojiang Liu, Wai Lam, Shuming Shi</span>
+    <br>
+    <i>NAACL 2019</i>
+    </li>
+
+    <li><a href = "https://ojs.aaai.org//index.php/AAAI/article/view/4704" target="_black">Unsupervised Learning helps Supervised Neural Word Segmentation</a>
+    <a href = "https://bcmi.sjtu.edu.cn/~zhaohai/pubs/aaai2019-ucws-1202.pdf" target="_black"> [preprint]</a>
+    <br>
+    <span class="authors">Xiaobin Wang, <b>Deng Cai</b>, Guangwei Xu, Hai Zhao, Linlin Li, Luo Si</span>
+    <br>
+    <i>AAAI 2019</i>
+    </li>
+
+    <li><a href = "http://aclweb.org/anthology/D18-1132" target="_black">Translating a Math Word Problem to a Expression Tree</a>
+    <a href = "http://aclweb.org/anthology/D18-1132" target="_black"> [paper]</a>
+    <br>
+    <span class="authors">Lei Wang, Yan Wang, <b>Deng Cai</b>, Dongxiang Zhang, Xiaojiang Liu</span>
+    <br>
+    <i>EMNLP 2018</i>
+    </li>
+
+    <li><a href = "http://www.aclweb.org/anthology/P/P17/P17-2096.pdf" target="_black">Fast and Accurate Neural Word Segmentation for Chinese</a>
+    <a href = "http://www.aclweb.org/anthology/P/P17/P17-2096.pdf" target="_black"> [paper]</a> <a href = "https://github.com/jcyk/greedyCWS" target="_black"> [code]</a>
+    <br><span class="authors"><b>Deng Cai</b>, Hai Zhao, Zhisong Zhang, Yuan Xin, Yongjian Wu, Feiyue Huang</span>
+    <br>
+    <i>ACL 2017</i>
+    </li>
+
+    <li><a href = "http://www.aclweb.org/anthology/P/P16/P16-1039.pdf" target="_black">Neural Word Segmentation Learning for Chinese</a>
+    <a href = "http://www.aclweb.org/anthology/P/P16/P16-1039.pdf" target="_black"> [paper]</a> <a href = "https://github.com/jcyk/CWS" target="_black"> [code]</a><a href = "./acl2016.pdf" target="_black"> [slides]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b>, Hai Zhao</span>
+    <br>
+    <i>ACL 2016</i>
+    </li>
+
+
+    <li><a href="https://ieeexplore.ieee.org/abstract/document/11526967/" target="_black">SeqPE: Transformer with Sequential Position Encoding</a><a href="https://arxiv.org/abs/2506.13277" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Huayang Li, Yahui Liu, Hongyu Sun, <b>Deng Cai</b>, Leyang Cui, Wei Bi, Peilin Zhao, Taro Watanabe</span>
+    <br>
+    <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i>, 2026.
+    <br>
+    </li>
+
+    <li><a href="https://arxiv.org/pdf/2309.01219.pdf" target="_black">Siren's Song in the AI Ocean: A Survey on Hallucination in Large Language Models</a><a href="https://arxiv.org/pdf/2309.01219.pdf" target="_black"> [arxiv]</a>
+    <br>
+    <span class="authors">Yue Zhang, Yafu Li, Leyang Cui, <b>Deng Cai</b>, Lemao Liu, Tingchen Fu, Xinting Huang, Enbo Zhao, Yu Zhang, Yulong Chen, Longyue Wang, Anh Tuan Luu, Wei Bi, Freda Shi, Shuming Shi</span>
+    <br>
+    <i>Computational Linguistics</i>, 2025.
+    <br>
+    </li>
+
+
+    <li><a href ="" target="_black">Exploring Dense Retrieval for Dialogue Response Selection</a>
+    <br>
+    <span class="authors">Tian Lan, <b>Deng Cai</b><sup>&#x2628;</sup>, Yan Wang, Yixuan Su, Heyan Huang, Xian-Ling Mao</span><br>
+    <i>ACM Transactions on Information Systems</i>, 2023.</li>
+
+    <li><a href = "https://ieeexplore.ieee.org/document/9449993" target="_black">PROTOTYPE-TO-STYLE: Dialogue Generation With Style-Aware Editing on Retrieval Memory </a>
+    <br>
+    <span class="authors">Yixuan Su, Yan Wang, <b>Deng Cai</b>, Simon Baker, Anna Korhonen, Nigel Collier</span><br>
+    <i>IEEE Transactions on Audio, Speech and Language Processing</i>, 2021. </li>
+
+    <li><a href = "https://ieeexplore.ieee.org/document/9108255" target="_black">Neural Machine Translation with Noisy Lexical Constraints </a>
+    <br>
+    <span class="authors">Huayang Li, Guoping Huang, <b>Deng Cai</b>, Lemao Liu</span><br>
+    <i>IEEE Transactions on Audio, Speech and Language Processing</i>, 2020.</li>
+
+    <li><a href = "https://dl.acm.org/doi/pdf/10.1145/3047405" target="_black">A Hybrid Model for Chinese Spelling Check </a>
+    <a href = "https://dl.acm.org/doi/pdf/10.1145/3047405" target="_black"> [paper]</a>
+    <br>
+    <span class="authors"><b>Deng Cai</b><sup>*</sup>, Hai Zhao<sup>*</sup>, Yang Xin, Yuzhu Wang, Zhongye Jia</span><br>
+    <i>ACM Transactions on Asian and Low-Resource Language Information Process</i>, 2017.
+    </li>
+    </ul>
+</details>
+</section>
+
+    </main>
 </div>
 <div id="footer">
     <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=e2bafc&w=255&t=n&d=PisgI_L4D9MdHx2ikxYXtQygzb7ZwGuoRZvo78Gb9Tc&co=ffffff'></script>
@@ -691,4 +944,3 @@ I recieved my PhD from <a href="https://www.cuhk.edu.hk/english/index.html">The 
 </div>
 </body>
 </html>
-
